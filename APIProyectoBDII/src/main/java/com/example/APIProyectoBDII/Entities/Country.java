@@ -21,6 +21,7 @@ public class Country {
 
     @OneToMany(mappedBy = "local")
     private List<Match> local;
+
     @OneToMany(mappedBy = "visitante")
     private List<Match> visitante;
 }

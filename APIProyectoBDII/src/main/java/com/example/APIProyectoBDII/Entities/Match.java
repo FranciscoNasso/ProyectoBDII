@@ -13,8 +13,12 @@ import lombok.Setter;
 @Entity(name = "Partido")
 public class Match {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "Id")
     private Integer id;
+    @Column (name = "Fecha")
     private String date;
+    @Column(name = "Hora")
     private String time;
     @ManyToOne
     @JoinColumn(name = "Local")
