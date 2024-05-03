@@ -2,7 +2,9 @@ package com.example.APIProyectoBDII.Repository;
 
 import com.example.APIProyectoBDII.Entities.User;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface IUser {
 
     @Query(value = "SELECT * FROM User WHERE user.id = ?1", nativeQuery = true)

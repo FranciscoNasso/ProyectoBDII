@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Premios")
+@Entity
 public class Rewards {
     @Id
     @Column(name = "Posicion")

@@ -2,7 +2,9 @@ package com.example.APIProyectoBDII.Repository;
 
 import com.example.APIProyectoBDII.Entities.Country;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ICountry {
 
     @Query(value = "Select * FROM Country WHERE country.name = ?1", nativeQuery = true)
