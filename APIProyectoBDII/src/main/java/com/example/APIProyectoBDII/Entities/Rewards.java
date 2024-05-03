@@ -8,24 +8,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class User {
+@Entity(name = "Premios")
+public class Rewards {
     @Id
-    @Column(name = "Cedula", unique = true, nullable = false)
-    private Integer id;
+    @Column(name = "Posicion")
+    private Integer position;
 
-    @Column (name = "Nombre")
-    private String name;
-
-    @Column(name = "Apellido")
-    private String apellido;
-
-    @Column(name = "Email")
-    private String email;
-
-
+    @Column(name = "Premio")
+    private String reward;
 }

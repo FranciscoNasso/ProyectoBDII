@@ -13,19 +13,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User {
+public class Score {
     @Id
-    @Column(name = "Cedula", unique = true, nullable = false)
-    private Integer id;
+    @Column(name = "Puntos")
+    private Integer points;
 
-    @Column (name = "Nombre")
-    private String name;
-
-    @Column(name = "Apellido")
-    private String apellido;
-
-    @Column(name = "Email")
-    private String email;
-
-
+    @Column(name = "Justificacion")
+    private String reason;
 }
