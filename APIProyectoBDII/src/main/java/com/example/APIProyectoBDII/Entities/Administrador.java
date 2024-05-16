@@ -1,8 +1,6 @@
 package com.example.APIProyectoBDII.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,8 +14,13 @@ import lombok.Setter;
 public class Administrador {
 
     @Id
+    @Column(name = "admin")
+    private Integer id;
+
     @JoinColumn(name = "admin")
-    private int User;
+    @ManyToOne
+    private User User;
+cod
 
 }
 
