@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: 'APIProyectoBDII'
+  datasource:
+    url: 'jdbc:mysql://localhost:3306/Campeonato'
+    username: 'user'
+    password: 'user'

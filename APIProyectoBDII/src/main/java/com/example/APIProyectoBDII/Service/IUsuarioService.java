@@ -9,7 +9,7 @@ public interface IUsuarioService {
 
     List<Usuario> findAll();
 
-    User findById(Integer id);
+    Usuario findById(Integer id);
 
     public void save (Usuario usuario);
 

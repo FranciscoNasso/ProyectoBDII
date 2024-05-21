@@ -3,6 +3,7 @@ package com.example.APIProyectoBDII.Persistence.Impl;
 import com.example.APIProyectoBDII.Entities.Usuario;
 import com.example.APIProyectoBDII.Persistence.IUsuarioDAO;
 import com.example.APIProyectoBDII.Repository.IUsuario;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,10 +11,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class UsuarioDAOImpl implements IUsuarioDAO {
 
-    @Autowired
-    private IUsuario usuarioRepository;
+    private final IUsuario usuarioRepository;
 
     @Override
     public List<Usuario> findAll() {
@@ -21,7 +22,7 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
     }
 
     @Override
-    public User findById(Integer id) {
+    public Usuario findById(Integer id) {
        return usuarioRepository.getuserById(id);
     }
 
