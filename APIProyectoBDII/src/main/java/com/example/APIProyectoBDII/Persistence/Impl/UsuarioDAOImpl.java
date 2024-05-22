@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
     }
 
     @Override
-    public Usuario findById(Integer id) {
+    public Optional<Usuario> findById(Integer id) {
        return usuarioRepository.getuserById(id);
     }
 

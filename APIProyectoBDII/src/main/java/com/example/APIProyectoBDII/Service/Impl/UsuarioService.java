@@ -6,10 +6,12 @@ import com.example.APIProyectoBDII.Service.IUsuarioService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@Component
+@Service
 public class UsuarioService implements IUsuarioService {
 
     @Autowired
@@ -21,7 +23,7 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public Usuario findById(Integer id) {
+    public Optional<Usuario> findById(Integer id) {
         return usuarioDAO.findById(id);
     }
 

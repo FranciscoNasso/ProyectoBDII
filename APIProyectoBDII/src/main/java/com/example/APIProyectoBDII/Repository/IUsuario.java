@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IUsuario extends CrudRepository<Usuario, Long> {
@@ -16,7 +17,7 @@ public interface IUsuario extends CrudRepository<Usuario, Long> {
     public List<Usuario> findAllusers();
 
     @Query(value = "SELECT * FROM Usuario WHERE Usuario.id = ?1", nativeQuery = true)
-    public Usuario getuserById(int id);
+    public Optional<Usuario> getuserById(int id);
 
     @Query(value = "DELETE FROM Usuario WHERE Usuario.id = ?1", nativeQuery = true)
     public void deleteuserById(int id);
