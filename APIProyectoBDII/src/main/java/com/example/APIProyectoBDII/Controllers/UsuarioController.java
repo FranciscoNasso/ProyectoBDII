@@ -31,12 +31,13 @@ public class UsuarioController {
                     .apellido(usuario.getApellido())
                     .email(usuario.getEmail())
                     .build();
+            usuarioDTOList.add(usuarioDTO);
         }
         return ResponseEntity.ok(usuarioDTOList);
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<?> findById(Integer id){
+    public ResponseEntity<?> findById(@PathVariable Integer id){
         Optional<Usuario> usuarioOptional = usuarioService.findById(id);
         if(usuarioOptional.isPresent()){
             Usuario usuario = usuarioOptional.get();
@@ -48,41 +49,27 @@ public class UsuarioController {
                     .build();
             return ResponseEntity.ok(usuarioDTO);
         }
-        return ResponseEntity.notFound().build();
+
+        return ResponseEntity.badRequest().body("No existe usuario con ese Id");
     }
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody UsuarioDTO usuarioDTO) throws URISyntaxException {
-        if(usuarioDTO.getNombre().isBlank() || usuarioDTO.getApellido().isBlank() || usuarioDTO.getEmail().isBlank()){
+        if(usuarioDTO.getId() == null || usuarioDTO.getNombre().isBlank() || usuarioDTO.getApellido().isBlank() || usuarioDTO.getEmail().isBlank()){
             return ResponseEntity.badRequest().body("Name, Last Name and Email are required");
         }
-        usuarioService.save(Usuario.builder()
-                .nombre(usuarioDTO.getNombre())
-                .apellido(usuarioDTO.getApellido())
-                .email(usuarioDTO.getEmail())
-                .build());
+        usuarioService.save(usuarioDTO.getId(), usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getEmail());
         return ResponseEntity.created(new URI("/usuario/save")).build();
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UsuarioDTO usuarioDTO){
-        Optional<Usuario> usuarioOptional = usuarioService.findById(id);
-        if(usuarioOptional.isPresent()){
-            Usuario usuario = usuarioOptional.get();
-            usuario.setNombre(usuarioDTO.getNombre());
-            usuario.setApellido(usuarioDTO.getApellido());
-            usuario.setEmail(usuarioDTO.getEmail());
-            usuarioService.save(usuario);
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
         if(id!=null){
-            usuarioService.delete(id);
-            return ResponseEntity.ok("Usuario eliminado");
+            if(usuarioService.findById(id).isPresent()){
+                usuarioService.delete(id);
+                return ResponseEntity.ok("Usuario eliminado");}
+            return ResponseEntity.badRequest().body("Usuario no existe");
         }
        return ResponseEntity.badRequest().body("se requiere un id");
     }

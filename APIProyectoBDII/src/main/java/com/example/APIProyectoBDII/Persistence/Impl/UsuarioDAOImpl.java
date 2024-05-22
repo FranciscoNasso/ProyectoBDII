@@ -28,8 +28,8 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
     }
 
     @Override
-    public void save(Usuario usuario) {
-        usuarioRepository.createuser(usuario);
+    public void save(int id, String nombre, String apellido, String email) {
+        usuarioRepository.createuser(id, nombre, apellido, email);
     }
 
     @Override

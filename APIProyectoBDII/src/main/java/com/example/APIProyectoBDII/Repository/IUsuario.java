@@ -2,8 +2,11 @@ package com.example.APIProyectoBDII.Repository;
 
 
 import com.example.APIProyectoBDII.Entities.Usuario;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,9 +22,13 @@ public interface IUsuario extends CrudRepository<Usuario, Long> {
     @Query(value = "SELECT * FROM Usuario WHERE Usuario.id = ?1", nativeQuery = true)
     public Optional<Usuario> getuserById(int id);
 
+    @Transactional
+    @Modifying
     @Query(value = "DELETE FROM Usuario WHERE Usuario.id = ?1", nativeQuery = true)
     public void deleteuserById(int id);
 
-    @Query(value = "INSERT INTO Usuario ?1", nativeQuery = true)
-    public void createuser(Usuario usuario);
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO Usuario (id, nombre, apellido, email) VALUES (:id, :nombre, :apellido, :email)", nativeQuery = true)
+    public void createuser(@Param("id") int id, @Param("nombre") String nombre, @Param("apellido") String apellido, @Param("email") String email);
 }
