@@ -1,18 +1,21 @@
-<div class="flex justify-center py-6">
+<div class="flex justify-center text-center py-20">
     <div>
         <h1 class="text-4xl font-semibold">Partidos</h1>
-
-        @for (partido of partidos; track $index) {
-        <div class="flex flex-col items-center justify-center">
-            <div class="flex">
-                <div class="border-2">
-                    <p class="text-lg font-semibold">Hora: {{partido.hora}}</p>
-                    <p class="text-lg font-semibold">Lugar: {{partido.lugar}}</p>
-                    <p class="text-lg font-semibold">Equipo local: {{partido.equipoLocal}}</p>
-                    <p class="text-lg font-semibold">Equipo visitante: {{partido.equipoVisitante}}</p>
-                    <p class="text-lg font-semibold">Resultado: {{partido.resultado}}</p>
+        @for (fecha of partidos; track $index) {
+        <h2 class="text-2xl font-semibold mt-8">{{fecha.fecha}}</h2>
+        <div class="flex flex-row gap-4">
+            @for (partido of fecha.partidos; track $index) {
+            <div class="border-2 text-center p-6 rounded-3xl mt-6 w-[330px] shadow-md space-y-3">
+                <p class="text-lg font-semibold">{{partido.hora}}</p>
+                <div class="flex flex-row justify-center items-center gap-3">
+                    <p class="text-lg font-semibold w-[30%]">{{partido.local}}</p>
+                    <p class="text-lg font-semibold w-[10%]  bg-neutral-300 rounded-lg">{{partido.golesLocal}}</p>
+                    <p class="text-lg font-semibold w-[10%] ">-</p>
+                    <p class="text-lg font-semibold w-[10%] bg-neutral-300 rounded-lg">{{partido.golesVisitante}}</p>
+                    <p class="text-lg font-semibold w-[30%]">{{partido.visitante}}</p>
                 </div>
             </div>
+            }
         </div>
         }
     </div>
