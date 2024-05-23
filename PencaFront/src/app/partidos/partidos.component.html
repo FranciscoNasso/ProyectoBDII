@@ -1,0 +1,19 @@
+<div class="flex justify-center py-6">
+    <div>
+        <h1 class="text-4xl font-semibold">Partidos</h1>
+
+        @for (partido of partidos; track $index) {
+        <div class="flex flex-col items-center justify-center">
+            <div class="flex">
+                <div class="border-2">
+                    <p class="text-lg font-semibold">Hora: {{partido.hora}}</p>
+                    <p class="text-lg font-semibold">Lugar: {{partido.lugar}}</p>
+                    <p class="text-lg font-semibold">Equipo local: {{partido.equipoLocal}}</p>
+                    <p class="text-lg font-semibold">Equipo visitante: {{partido.equipoVisitante}}</p>
+                    <p class="text-lg font-semibold">Resultado: {{partido.resultado}}</p>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
