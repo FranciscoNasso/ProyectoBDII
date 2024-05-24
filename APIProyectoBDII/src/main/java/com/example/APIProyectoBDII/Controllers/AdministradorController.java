@@ -54,15 +54,18 @@ public class AdministradorController {
     @GetMapping("/find/{id}")
     public ResponseEntity<?> getAdministradorById(@PathVariable int id){
         Optional <Administradores> administradorOptional = administradorService.findById(id);
-        Optional<Usuario> usuarioOptional = usuarioService.findById(administradorOptional.get().getId());
-        Usuario usuario = usuarioOptional.get();
-        UsuarioDTO usuarioDTO = UsuarioDTO.builder()
-                .id(usuario.getId())
-                .nombre(usuario.getNombre())
-                .apellido(usuario.getApellido())
-                .email(usuario.getEmail())
-                .build();
-        return ResponseEntity.ok(usuarioDTO);
+        if (administradorOptional.isPresent()) {
+            Optional<Usuario> usuarioOptional = usuarioService.findById(administradorOptional.get().getId());
+            Usuario usuario = usuarioOptional.get();
+            UsuarioDTO usuarioDTO = UsuarioDTO.builder()
+                    .id(usuario.getId())
+                    .nombre(usuario.getNombre())
+                    .apellido(usuario.getApellido())
+                    .email(usuario.getEmail())
+                    .build();
+            return ResponseEntity.ok(usuarioDTO);
+        }
+        return ResponseEntity.badRequest().body("No existe el administrador con el id " + id);
     }
 
 
