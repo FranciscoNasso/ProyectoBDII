@@ -23,6 +23,7 @@ public class AdministradorController {
     @Autowired
     private IAdministradorService administradorService;
 
+    @Autowired
     private IUsuarioService usuarioService;
 
     @GetMapping("/findall")
@@ -74,19 +75,18 @@ public class AdministradorController {
         if(administradorDTO.getId() == null){
             return ResponseEntity.badRequest().body("Se requiere un id para guardar el Administrador");
         }
-        Optional<Usuario> usuarioOptional = usuarioService.findById(administradorDTO.getId());
-        if(usuarioOptional.isPresent()){
+        if(usuarioService.findById(administradorDTO.getId()).isPresent()){
             administradorService.save(administradorDTO.getId());
             return ResponseEntity.created(new URI("/administrador/save")).build();
         }
         return ResponseEntity.badRequest().body("El usuario debe estar registrado previamente");
     }
 
-    @DeleteMapping("/delete?{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteAdministrador(@PathVariable Integer id){
         if(id != null){
             if(administradorService.findById(id).isPresent()){
-                usuarioService.delete(id);
+                administradorService.delete(id);
                 return ResponseEntity.ok().body("Administrador eliminado");
             }
             return ResponseEntity.badRequest().body("El administrador no existe");
