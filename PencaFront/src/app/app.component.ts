@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'PencFront';
+  navigation = [
+    { name: 'Partidos', href: '#', current: true },
+    { name: 'Team', href: '#', current: false },
+    { name: 'Projects', href: '#', current: false },
+    { name: 'Calendar', href: '#', current: false },
+  ];
+  isMenuOpen = false;
 }

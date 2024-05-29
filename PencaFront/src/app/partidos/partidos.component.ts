@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-partidos',
-  standalone: true,
-  imports: [],
   templateUrl: './partidos.component.html',
-  styleUrl: './partidos.component.css'
+  styleUrls: ['./partidos.component.css']
 })
 export class PartidosComponent {
   title = 'Partidos';
@@ -27,6 +25,13 @@ export class PartidosComponent {
           visitante: 'Bolivia',
           golesLocal: 3,
           golesVisitante: 1
+        },
+        {
+          hora: '21:00',
+          local: 'Paraguay',
+          visitante: 'Bolivia',
+          golesLocal: 0,
+          golesVisitante: 0
         }
       ]
     },
