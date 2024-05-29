@@ -28,6 +28,6 @@ public interface IPais extends CrudRepository<Pais, String> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO Pais (nombre) VALUES :nombre", nativeQuery = true)
+    @Query(value = "INSERT INTO Pais (nombre) VALUES (:nombre)", nativeQuery = true)
     public void createPais(@Param("nombre") String nombre);
 }

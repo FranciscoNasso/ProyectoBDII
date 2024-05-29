@@ -60,7 +60,10 @@ public class PaisController {
        if(nombre.isBlank()){
            return ResponseEntity.badRequest().body("Nombre es requerido");
        }
-         paisService.delete(nombre);
-            return ResponseEntity.ok("Pais eliminado");
+       if(paisService.findById(nombre).isPresent()) {
+           paisService.delete(nombre);
+           return ResponseEntity.ok("Pais eliminado");
+       }
+       return ResponseEntity.badRequest().body("No existe pais con ese nombre");
     }
 }

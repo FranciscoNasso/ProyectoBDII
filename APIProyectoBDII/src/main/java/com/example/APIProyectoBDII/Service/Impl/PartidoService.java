@@ -1,0 +1,39 @@
+package com.example.APIProyectoBDII.Service.Impl;
+
+import com.example.APIProyectoBDII.Entities.Partido;
+import com.example.APIProyectoBDII.Persistence.IPartidoDAO;
+import com.example.APIProyectoBDII.Service.IPartidoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class PartidoService implements IPartidoService {
+
+    @Autowired
+    private IPartidoDAO partidoDAO;
+
+    @Override
+    public List<Partido> getPartidos() {
+        return partidoDAO.getPartidos();
+    }
+
+    @Override
+    public Optional<Partido> getPartido(Integer id) {
+        return partidoDAO.getPartido(id);
+    }
+
+    @Override
+    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String paisLocal, String paisVisitante) {
+        partidoDAO.savePartido(id, fecha, hora, paisLocal, paisVisitante);
+    }
+
+    @Override
+    public void deletePartido(Integer id) {
+        partidoDAO.deletePartido(id);
+    }
+}
