@@ -3,7 +3,9 @@ package com.example.APIProyectoBDII.Controllers;
 import com.example.APIProyectoBDII.Controllers.DTO.LoginDTO;
 import com.example.APIProyectoBDII.Controllers.DTO.LoginDTO.LoginDTOBuilder;
 import com.example.APIProyectoBDII.Entities.Login;
+import com.example.APIProyectoBDII.Repository.IAdministrador;
 import com.example.APIProyectoBDII.Service.ILoginService;
+import com.example.APIProyectoBDII.Service.IAdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,8 @@ public class LoginController {
 
     @Autowired
     private ILoginService loginService;
+    @Autowired
+    private IAdministradorService administradoresService;
 
     private String hashMD5(String input) {
         try {
@@ -58,11 +62,14 @@ public class LoginController {
         if(loginOptional.isPresent()){
             Login login = loginOptional.get();
             if (loginService.getContrasenia(ci).equals(hashMD5(contrasenia))) {
+                //checkear si es admin
+                int esAdmin = administradoresService.checkExistence(ci);
+
                 LoginDTO loginDTO = LoginDTO.builder()
                         .ci(login.getId())
                         .contrasenia(contrasenia)
                         .build();
-                return ResponseEntity.ok(loginDTO);
+                return ResponseEntity.ok(loginDTO.toString() + "\nEs admin: " + (esAdmin == 1 ? "Si" : "No"));
             } else {
                 return ResponseEntity.badRequest().body("Contraseña incorrecta");
             }
