@@ -37,4 +37,9 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
         usuarioRepository.deleteuserById(id);
 
     }
+
+    @Override
+    public void setJWT(Integer id, String jwt) {
+        usuarioRepository.setJWT(id, jwt);
+    }
 }

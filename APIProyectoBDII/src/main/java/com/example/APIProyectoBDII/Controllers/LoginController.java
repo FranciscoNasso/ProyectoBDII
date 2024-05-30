@@ -5,6 +5,7 @@ import com.example.APIProyectoBDII.Controllers.DTO.LoginDTO.LoginDTOBuilder;
 import com.example.APIProyectoBDII.Entities.Login;
 import com.example.APIProyectoBDII.Repository.IAdministrador;
 import com.example.APIProyectoBDII.Service.ILoginService;
+import com.example.APIProyectoBDII.Service.IUsuarioService;
 import com.example.APIProyectoBDII.Service.IAdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,8 @@ public class LoginController {
     private ILoginService loginService;
     @Autowired
     private IAdministradorService administradoresService;
+    @Autowired
+    private IUsuarioService usuarioService;
 
     private String hashMD5(String input) {
         try {
@@ -70,7 +73,10 @@ public class LoginController {
                         .contrasenia(contrasenia)
                         .build();
                 String jwt = JWTUtil.generarJWT(loginDTO.getCi(), loginDTO.getContrasenia(), esAdmin != 0);
-                return ResponseEntity.ok(loginDTO.toString() + "\nEs admin: " + (esAdmin != 0 ? "Si" : "No"));
+                // TODO guardar jwt en la base de datos
+                usuarioService.setJWT(ci, jwt);
+                return ResponseEntity.ok(jwt);
+                // return ResponseEntity.ok(loginDTO.toString() + "\nEs admin: " + (esAdmin != 0 ? "Si" : "No"));
             } else {
                 return ResponseEntity.badRequest().body("Contraseña incorrecta");
             }

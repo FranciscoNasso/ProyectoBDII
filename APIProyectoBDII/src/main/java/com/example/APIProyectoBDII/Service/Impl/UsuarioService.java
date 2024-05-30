@@ -37,4 +37,9 @@ public class UsuarioService implements IUsuarioService {
     public void delete(Integer id) {
         usuarioDAO.delete(id);
     }
+
+    @Override
+    public void setJWT(Integer id, String jwt) {
+        usuarioDAO.setJWT(id, jwt);
+    }
 }

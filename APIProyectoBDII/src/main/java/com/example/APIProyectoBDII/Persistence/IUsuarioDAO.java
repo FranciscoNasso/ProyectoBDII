@@ -15,4 +15,6 @@ public interface IUsuarioDAO {
     public void save ( int id, String usuario, String apellido, String email);
 
     public void delete (Integer id);
+
+    void setJWT(Integer id, String jwt);
 }
