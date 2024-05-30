@@ -21,7 +21,8 @@ CREATE TABLE Usuario(
     id INT PRIMARY KEY,
     nombre VARCHAR(50),
     apellido VARCHAR(50),
-    email VARCHAR(50)
+    email VARCHAR(50),
+    jwt VARCHAR(255)
 );
 
 CREATE TABLE Administradores(

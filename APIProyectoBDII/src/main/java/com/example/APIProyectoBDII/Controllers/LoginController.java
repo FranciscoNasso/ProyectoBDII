@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.APIProyectoBDII.Utils.JWTUtil;
+
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -62,20 +64,19 @@ public class LoginController {
         if(loginOptional.isPresent()){
             Login login = loginOptional.get();
             if (loginService.getContrasenia(ci).equals(hashMD5(contrasenia))) {
-                //checkear si es admin
                 int esAdmin = administradoresService.checkExistence(ci);
-
                 LoginDTO loginDTO = LoginDTO.builder()
                         .ci(login.getId())
                         .contrasenia(contrasenia)
                         .build();
-                return ResponseEntity.ok(loginDTO.toString() + "\nEs admin: " + (esAdmin == 1 ? "Si" : "No"));
+                String jwt = JWTUtil.generarJWT(loginDTO.getCi(), loginDTO.getContrasenia(), esAdmin != 0);
+                return ResponseEntity.ok(loginDTO.toString() + "\nEs admin: " + (esAdmin != 0 ? "Si" : "No"));
             } else {
                 return ResponseEntity.badRequest().body("Contraseña incorrecta");
             }
         }
         
         return ResponseEntity.badRequest().body("No existe login con esa cedula");
-    }
+    }   
 
 }
