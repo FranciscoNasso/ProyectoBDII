@@ -3,7 +3,6 @@ package com.example.APIProyectoBDII.Persistence.Impl;
 import com.example.APIProyectoBDII.Entities.Partido;
 import com.example.APIProyectoBDII.Persistence.IPartidoDAO;
 import com.example.APIProyectoBDII.Repository.IPartido;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +28,8 @@ public class PartidoDAOImpl implements IPartidoDAO {
     }
 
     @Override
-    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String partidoLocal, String partidoVisitante, Integer goles_paisLocal, Integer goles_paisVisitante) {
-        partidoRepository.savePartido(id, fecha, hora, partidoLocal, partidoVisitante, goles_paisLocal, goles_paisVisitante);
+    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String partidoLocal, String partidoVisitante, Integer goles_pais_local, Integer goles_pais_visitante) {
+        partidoRepository.savePartido(id, fecha, hora, partidoLocal, partidoVisitante, goles_pais_local, goles_pais_visitante);
     }
 
     @Override

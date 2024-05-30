@@ -24,9 +24,9 @@ public class PartidoDTO {
 
     private String paisVisitante;
 
-    private Integer goles_paisLocal;
+    private Integer goles_pais_local;
 
-    private Integer goles_paisVisitante;
+    private Integer goles_pais_visitante;
 
 
 }

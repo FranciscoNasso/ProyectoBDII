@@ -24,8 +24,8 @@ public interface IPartido extends CrudRepository<Partido, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO Partido (id, fecha, hora, id_paisLocal, id_paisVisitante, goles_paisLocal, goles_paisVisitante) VALUES (:id, :fecha, :hora, :id_paisLocal, :id_paisVisitante, :goles_paisLocal, :goles_paisVisitante)", nativeQuery = true)
-    public void savePartido(@Param("id")  Integer id, @Param("fecha") LocalDate fecha, @Param("hora") LocalTime hora, @Param("id_paisLocal") String id_paisLocal, @Param("id_paisVisitante") String id_paisVisitante, @Param("goles_paisLocal") Integer goles_paisLocal, @Param("goles_paisVisitante") Integer goles_paisVisitante);
+    @Query(value = "INSERT INTO Partido (id, fecha, hora, id_pais_local, id_pais_visitante, goles_pais_local, goles_pais_visitante) VALUES (:id, :fecha, :hora, :id_pais_local, :id_pais_visitante, :goles_pais_local, :goles_pais_visitante)", nativeQuery = true)
+    public void savePartido(@Param("id")  Integer id, @Param("fecha") LocalDate fecha, @Param("hora") LocalTime hora, @Param("id_pais_local") String id_pais_local, @Param("id_pais_visitante") String id_pais_visitante, @Param("goles_pais_local") Integer goles_pais_local, @Param("goles_pais_visitante") Integer goles_pais_visitante);
 
     @Transactional
     @Modifying
