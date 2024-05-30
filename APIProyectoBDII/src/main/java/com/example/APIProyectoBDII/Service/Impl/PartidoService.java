@@ -18,8 +18,8 @@ public class PartidoService implements IPartidoService {
     private IPartidoDAO partidoDAO;
 
     @Override
-    public List<Partido> getPartidos() {
-        return partidoDAO.getPartidos();
+    public List<Partido> findAllPartidos() {
+        return partidoDAO.findAllPartidos();
     }
 
     @Override
@@ -28,8 +28,8 @@ public class PartidoService implements IPartidoService {
     }
 
     @Override
-    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String paisLocal, String paisVisitante) {
-        partidoDAO.savePartido(id, fecha, hora, paisLocal, paisVisitante);
+    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String paisLocal, String paisVisitante, Integer goles_paisLocal, Integer goles_paisVisitante) {
+        partidoDAO.savePartido(id, fecha, hora, paisLocal, paisVisitante, goles_paisLocal, goles_paisVisitante);
     }
 
     @Override

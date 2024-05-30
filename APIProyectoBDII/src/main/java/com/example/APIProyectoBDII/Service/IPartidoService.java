@@ -9,11 +9,11 @@ import java.util.Optional;
 
 public interface IPartidoService {
 
-    public List<Partido> getPartidos();
+    public List<Partido> findAllPartidos();
 
     public Optional<Partido> getPartido(Integer id);
 
-    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String paisLocal, String paisVisitante);
+    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String paisLocal, String paisVisitante, Integer goles_paisLocal, Integer goles_paisVisitante);
 
     public void deletePartido(Integer id);
 }

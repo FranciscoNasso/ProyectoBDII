@@ -32,9 +32,9 @@ public class Partido {
     private Pais idPaisvisitante;
 
     @Column(name = "goles_paisLocal")
-    private Integer golesPaislocal;
+    private Integer goles_paisLocal;
 
     @Column(name = "goles_paisVisitante")
-    private Integer golesPaisvisitante;
+    private Integer goles_paisVisitante;
 
 }

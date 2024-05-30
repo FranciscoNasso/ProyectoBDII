@@ -19,8 +19,8 @@ public class PartidoDAOImpl implements IPartidoDAO {
     private IPartido partidoRepository;
 
     @Override
-    public List<Partido> getPartidos() {
-        return (List<Partido>) partidoRepository.getPartidos();
+    public List<Partido> findAllPartidos() {
+        return partidoRepository.findAllPartidos();
     }
 
     @Override
@@ -29,8 +29,8 @@ public class PartidoDAOImpl implements IPartidoDAO {
     }
 
     @Override
-    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String partidoLocal, String partidoVisitante) {
-        partidoRepository.savePartido(id, fecha, hora, partidoLocal, partidoVisitante);
+    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String partidoLocal, String partidoVisitante, Integer goles_paisLocal, Integer goles_paisVisitante) {
+        partidoRepository.savePartido(id, fecha, hora, partidoLocal, partidoVisitante, goles_paisLocal, goles_paisVisitante);
     }
 
     @Override

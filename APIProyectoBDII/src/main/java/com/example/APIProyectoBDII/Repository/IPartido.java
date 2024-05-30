@@ -17,18 +17,18 @@ import java.util.Optional;
 public interface IPartido extends CrudRepository<Partido, Long> {
 
     @Query(value = "SELECT * FROM Partido", nativeQuery = true)
-    public List<Partido> getPartidos();
+    public List<Partido> findAllPartidos();
 
     @Query(value = "SELECT * FROM Partido WHERE Partido.id = ?1", nativeQuery = true)
     public Optional<Partido> getPartidoById(Integer id);
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO Partido (id, fecha, hora, paisLocal, paisVisitante) VALUES (:id, :fecha, :hora, :paisLocal, :paisVisitante)", nativeQuery = true)
-    public void savePartido(@Param("id")  Integer id, @Param("fecha") LocalDate fecha, @Param("hora") LocalTime hora, @Param("paisLocal") String paisLocal, @Param("paisVisitante") String paisVisitante);
+    @Query(value = "INSERT INTO Partido (id, fecha, hora, id_paisLocal, id_paisVisitante, goles_paisLocal, goles_paisVisitante) VALUES (:id, :fecha, :hora, :id_paisLocal, :id_paisVisitante, :goles_paisLocal, :goles_paisVisitante)", nativeQuery = true)
+    public void savePartido(@Param("id")  Integer id, @Param("fecha") LocalDate fecha, @Param("hora") LocalTime hora, @Param("id_paisLocal") String id_paisLocal, @Param("id_paisVisitante") String id_paisVisitante, @Param("goles_paisLocal") Integer goles_paisLocal, @Param("goles_paisVisitante") Integer goles_paisVisitante);
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM Partido WHERE Partido.id = ?1")
+    @Query(value = "DELETE FROM Partido WHERE Partido.id = ?1", nativeQuery = true)
     public void deletePartidoById(Integer id);
 }

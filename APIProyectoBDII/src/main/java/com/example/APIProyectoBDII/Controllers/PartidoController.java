@@ -27,8 +27,8 @@ public class PartidoController {
     private Integer idPartido = 1;
 
     @GetMapping("/findall")
-    public ResponseEntity<?> getAllPartidos() {
-        List<Partido> partidoList = partidoService.getPartidos();
+    public ResponseEntity<?> findAllPartidos() {
+        List<Partido> partidoList = partidoService.findAllPartidos();
         List<PartidoDTO> partidoDTOList = new ArrayList<>();
         for (Partido partido : partidoList) {
             PartidoDTO partidoDTo = PartidoDTO.builder()
@@ -37,6 +37,8 @@ public class PartidoController {
                     .hora(partido.getHora())
                     .paisLocal(partido.getIdPaislocal().getNombre())
                     .paisVisitante(partido.getIdPaisvisitante().getNombre())
+                    .goles_paisLocal(partido.getGoles_paisLocal())
+                    .goles_paisVisitante(partido.getGoles_paisVisitante())
                     .build();
             partidoDTOList.add(partidoDTo);
         }
@@ -54,6 +56,8 @@ public class PartidoController {
                     .hora(partido.getHora())
                     .paisLocal(partido.getIdPaislocal().getNombre())
                     .paisVisitante(partido.getIdPaisvisitante().getNombre())
+                    .goles_paisLocal(partido.getGoles_paisLocal())
+                    .goles_paisVisitante(partido.getGoles_paisVisitante())
                     .build();
             return ResponseEntity.ok(partidoOptional);
         }
@@ -66,7 +70,13 @@ public class PartidoController {
             ResponseEntity.badRequest().body("El partido necesita fecha, hora, pais local y pais visitante");
         }
         if(paisService.findById(partidoDTO.getPaisLocal()).isPresent() && paisService.findById(partidoDTO.getPaisVisitante()).isPresent()){
-            partidoService.savePartido(idPartido, partidoDTO.getFecha(), partidoDTO.getHora(), partidoDTO.getPaisLocal(), partidoDTO.getPaisVisitante());
+            if (partidoDTO.getGoles_paisLocal() == null) {
+                partidoDTO.setGoles_paisLocal(-1);
+            }
+            if (partidoDTO.getGoles_paisVisitante() == null) {
+                partidoDTO.setGoles_paisVisitante(-1);
+            }
+            partidoService.savePartido(idPartido, partidoDTO.getFecha(), partidoDTO.getHora(), partidoDTO.getPaisLocal(), partidoDTO.getPaisVisitante(), partidoDTO.getGoles_paisLocal(), partidoDTO.getGoles_paisVisitante());
             idPartido += 1;
             return ResponseEntity.created(new URI("/partido/save")).build();
         }
@@ -74,10 +84,10 @@ public class PartidoController {
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer idPartido){
-        if(idPartido != null){
-            if(partidoService.getPartido(idPartido).isPresent()){
-                partidoService.deletePartido(idPartido);
+    public ResponseEntity<?> delete(@PathVariable Integer id){
+        if(id != null){
+            if(partidoService.getPartido(id).isPresent()){
+                partidoService.deletePartido(id);
                 return ResponseEntity.ok("Partido eliminado correctamente");
             }
             return ResponseEntity.badRequest().body("Partido con ese id no existe");
