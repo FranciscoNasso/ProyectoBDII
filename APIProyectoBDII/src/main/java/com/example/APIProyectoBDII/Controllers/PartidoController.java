@@ -37,8 +37,8 @@ public class PartidoController {
                     .hora(partido.getHora())
                     .paisLocal(partido.getIdPaislocal().getNombre())
                     .paisVisitante(partido.getIdPaisvisitante().getNombre())
-                    .goles_paisLocal(partido.getGoles_paisLocal())
-                    .goles_paisVisitante(partido.getGoles_paisVisitante())
+                    .goles_pais_local(partido.getGoles_pais_local())
+                    .goles_pais_visitante(partido.getGoles_pais_visitante())
                     .build();
             partidoDTOList.add(partidoDTo);
         }
@@ -56,8 +56,8 @@ public class PartidoController {
                     .hora(partido.getHora())
                     .paisLocal(partido.getIdPaislocal().getNombre())
                     .paisVisitante(partido.getIdPaisvisitante().getNombre())
-                    .goles_paisLocal(partido.getGoles_paisLocal())
-                    .goles_paisVisitante(partido.getGoles_paisVisitante())
+                    .goles_pais_local(partido.getGoles_pais_local())
+                    .goles_pais_visitante(partido.getGoles_pais_visitante())
                     .build();
             return ResponseEntity.ok(partidoOptional);
         }
@@ -70,13 +70,13 @@ public class PartidoController {
             ResponseEntity.badRequest().body("El partido necesita fecha, hora, pais local y pais visitante");
         }
         if(paisService.findById(partidoDTO.getPaisLocal()).isPresent() && paisService.findById(partidoDTO.getPaisVisitante()).isPresent()){
-            if (partidoDTO.getGoles_paisLocal() == null) {
-                partidoDTO.setGoles_paisLocal(-1);
+            if (partidoDTO.getGoles_pais_local() == null) {
+                partidoDTO.setGoles_pais_local(-1);
             }
-            if (partidoDTO.getGoles_paisVisitante() == null) {
-                partidoDTO.setGoles_paisVisitante(-1);
+            if (partidoDTO.getGoles_pais_visitante() == null) {
+                partidoDTO.setGoles_pais_visitante(-1);
             }
-            partidoService.savePartido(idPartido, partidoDTO.getFecha(), partidoDTO.getHora(), partidoDTO.getPaisLocal(), partidoDTO.getPaisVisitante(), partidoDTO.getGoles_paisLocal(), partidoDTO.getGoles_paisVisitante());
+            partidoService.savePartido(idPartido, partidoDTO.getFecha(), partidoDTO.getHora(), partidoDTO.getPaisLocal(), partidoDTO.getPaisVisitante(), partidoDTO.getGoles_pais_local(), partidoDTO.getGoles_pais_visitante());
             idPartido += 1;
             return ResponseEntity.created(new URI("/partido/save")).build();
         }

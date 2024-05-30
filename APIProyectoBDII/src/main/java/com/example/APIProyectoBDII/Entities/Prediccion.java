@@ -20,10 +20,10 @@ public class Prediccion {
     @JoinColumn(name = "id_participante")
     private Participante idParticipante;
 
-    @Column(name = "goles_paisLocal")
+    @Column(name = "goles_pais_local")
     private Integer golesPaislocal;
 
-    @Column(name = "goles_paisVisitante")
+    @Column(name = "goles_pais_visitante")
     private Integer golesPaisvisitante;
 
 }

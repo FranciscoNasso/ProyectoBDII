@@ -24,17 +24,17 @@ public class Partido {
     private LocalTime hora;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_paisLocal")
+    @JoinColumn(name = "id_pais_local")
     private Pais idPaislocal;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_paisVisitante")
+    @JoinColumn(name = "id_pais_visitante")
     private Pais idPaisvisitante;
 
-    @Column(name = "goles_paisLocal")
-    private Integer goles_paisLocal;
+    @Column(name = "goles_pais_local")
+    private Integer goles_pais_local;
 
-    @Column(name = "goles_paisVisitante")
-    private Integer goles_paisVisitante;
+    @Column(name = "goles_pais_visitante")
+    private Integer goles_pais_visitante;
 
 }

@@ -9,12 +9,12 @@ CREATE TABLE Partido(
     id INT PRIMARY KEY,
     fecha DATE,
     hora TIME,
-    id_paisLocal VARCHAR(50),
-    id_paisVisitante VARCHAR(50),
-    goles_paisLocal INT,
-    goles_paisVisitante INT,
-    FOREIGN KEY (id_paisLocal) REFERENCES Pais(nombre),
-    FOREIGN KEY (id_paisVisitante) REFERENCES Pais(nombre)
+    id_pais_local VARCHAR(50),
+    id_pais_visitante VARCHAR(50),
+    goles_pais_local INT,
+    goles_pais_visitante INT,
+    FOREIGN KEY (id_pais_local) REFERENCES Pais(nombre),
+    FOREIGN KEY (id_pais_visitante) REFERENCES Pais(nombre)
 );
 
 CREATE TABLE Usuario(
@@ -38,8 +38,8 @@ CREATE TABLE Prediccion(
     id INT PRIMARY KEY,
     id_partido INT,
     id_participante INT,
-    goles_paisLocal INT,
-    goles_paisVisitante INT,
+    goles_pais_local INT,
+    goles_pais_visitante INT,
     FOREIGN KEY (id_partido) REFERENCES Partido(id),
     FOREIGN KEY (id_participante) REFERENCES Participante(id)
 );
