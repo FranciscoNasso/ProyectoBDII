@@ -10,8 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Administradores")
-public class Administradores {
+@Table(name = "Administrador")
+public class Administrador {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;

@@ -24,5 +24,8 @@ public class Usuario {
 
     @Column(name = "email", length = 50)
     private String email;
+    
+    @Column(name = "jwt", length = 255)
+    private String jwt;
 
 }

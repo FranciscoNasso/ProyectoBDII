@@ -31,4 +31,9 @@ public interface IUsuario extends CrudRepository<Usuario, Long> {
     @Transactional
     @Query(value = "INSERT INTO Usuario (id, nombre, apellido, email) VALUES (:id, :nombre, :apellido, :email)", nativeQuery = true)
     public void createuser(@Param("id") int id, @Param("nombre") String nombre, @Param("apellido") String apellido, @Param("email") String email);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Usuario SET jwt = :jwt WHERE Usuario.id = :id", nativeQuery = true)
+    public void setJWT(Integer id, String jwt);
 }

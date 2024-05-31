@@ -35,4 +35,9 @@ public class AdministradorDAOImpl implements IAdministradorDAO {
     public void delete(int id) {
         adminstradorRepository.deleteAdminById(id);
     }
+import com.example.APIProyectoBDII.Repository.IAdministrador;
+    @Override
+    public int checkExistence(Integer ci) {
+        return administradorRepository.checkExistence(ci);
+    }
 }

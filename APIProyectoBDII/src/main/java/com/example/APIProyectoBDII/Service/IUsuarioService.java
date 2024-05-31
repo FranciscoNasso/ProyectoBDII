@@ -14,4 +14,6 @@ public interface IUsuarioService {
     public void save (int id, String nombre, String apellido, String email);
 
     public void delete (Integer id);
+
+    public void setJWT(Integer id, String jwt);
 }

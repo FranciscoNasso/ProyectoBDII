@@ -15,4 +15,6 @@ public interface IAdministradorService {
     public void save(int id);
 
     public void delete(int id);
+import com.example.APIProyectoBDII.Entities.Administrador;
+    int checkExistence(Integer id);
 }

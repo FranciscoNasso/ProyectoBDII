@@ -22,6 +22,8 @@ CREATE TABLE Usuario(
     nombre VARCHAR(50),
     apellido VARCHAR(50),
     email VARCHAR(50)
+    email VARCHAR(50),
+    jwt VARCHAR(255)
 );
 
 CREATE TABLE Administradores(
@@ -34,6 +36,7 @@ CREATE TABLE Participante(
     campeon VARCHAR(50),
     subcampeon VARCHAR(50),
     FOREIGN KEY (id) REFERENCES Usuario(id)
+    FOREIGN KEY (id) REFERENCES Usuario(id),
     FOREIGN KEY (campeon) REFERENCES Pais(nombre),
     FOREIGN KEY (subcampeon) REFERENCES Pais(nombre)
 );
@@ -46,4 +49,10 @@ CREATE TABLE Prediccion(
     goles_pais_visitante INT,
     FOREIGN KEY (id_partido) REFERENCES Partido(id),
     FOREIGN KEY (id_participante) REFERENCES Participante(id)
+);
+
+CREATE TABLE Login(
+    ci INT PRIMARY KEY,
+    contrasenia VARCHAR(50),
+    FOREIGN KEY (ci) REFERENCES Usuario(id)
 );

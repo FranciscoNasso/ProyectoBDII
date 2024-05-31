@@ -5,6 +5,8 @@ import com.example.APIProyectoBDII.Entities.Usuario;
 import com.example.APIProyectoBDII.Persistence.IAdministradorDAO;
 import com.example.APIProyectoBDII.Service.IAdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.example.APIProyectoBDII.Entities.Administrador;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,5 +37,7 @@ public class AdministradorService implements IAdministradorService {
     @Override
     public void delete(int id) {
         administradorDAO.delete(id);
+    public int checkExistence(Integer id) {
+        return administradorDAO.checkExistence(id);
     }
 }
