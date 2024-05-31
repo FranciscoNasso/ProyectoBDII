@@ -28,8 +28,8 @@ public class PartidoDAOImpl implements IPartidoDAO {
     }
 
     @Override
-    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String partidoLocal, String partidoVisitante, Integer goles_pais_local, Integer goles_pais_visitante) {
-        partidoRepository.savePartido(id, fecha, hora, partidoLocal, partidoVisitante, goles_pais_local, goles_pais_visitante);
+    public void savePartido(LocalDate fecha, LocalTime hora, String partidoLocal, String partidoVisitante, Integer goles_pais_local, Integer goles_pais_visitante) {
+        partidoRepository.savePartido( fecha, hora, partidoLocal, partidoVisitante, goles_pais_local, goles_pais_visitante);
     }
 
     @Override

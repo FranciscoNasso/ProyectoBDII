@@ -28,8 +28,8 @@ public class PartidoService implements IPartidoService {
     }
 
     @Override
-    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String paisLocal, String paisVisitante, Integer goles_pais_local, Integer goles_pais_visitante) {
-        partidoDAO.savePartido(id, fecha, hora, paisLocal, paisVisitante, goles_pais_local, goles_pais_visitante);
+    public void savePartido( LocalDate fecha, LocalTime hora, String paisLocal, String paisVisitante, Integer goles_pais_local, Integer goles_pais_visitante) {
+        partidoDAO.savePartido(fecha, hora, paisLocal, paisVisitante, goles_pais_local, goles_pais_visitante);
     }
 
     @Override

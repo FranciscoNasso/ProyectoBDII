@@ -13,7 +13,7 @@ public interface IPartidoDAO {
 
     Optional<Partido> getPartido(Integer id);
 
-    public void savePartido(Integer id, LocalDate fecha, LocalTime hora, String partidoLocal, String partidoVisitante, Integer goles_pais_local, Integer goles_pais_visitante);
+    public void savePartido( LocalDate fecha, LocalTime hora, String partidoLocal, String partidoVisitante, Integer goles_pais_local, Integer goles_pais_visitante);
 
     public void deletePartido(Integer id);
 }

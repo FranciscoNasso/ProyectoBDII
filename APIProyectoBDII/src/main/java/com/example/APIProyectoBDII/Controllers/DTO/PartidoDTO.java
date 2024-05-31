@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Controllers.DTO;
 
+import com.example.APIProyectoBDII.Entities.Pais;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

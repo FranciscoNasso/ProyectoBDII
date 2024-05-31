@@ -24,7 +24,7 @@ public class PartidoController {
     @Autowired
     private IPaisService paisService;
 
-    private Integer idPartido = 1;
+
 
     @GetMapping("/findall")
     public ResponseEntity<?> findAllPartidos() {
@@ -59,15 +59,15 @@ public class PartidoController {
                     .goles_pais_local(partido.getGoles_pais_local())
                     .goles_pais_visitante(partido.getGoles_pais_visitante())
                     .build();
-            return ResponseEntity.ok(partidoOptional);
+            return ResponseEntity.ok(partidoDTO);
         }
         return ResponseEntity.badRequest().body("Partido no encontrado");
     }
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody PartidoDTO partidoDTO) throws URISyntaxException {
-        if(partidoDTO.getFecha() == null || partidoDTO.getHora() == null || partidoDTO.getPaisLocal().isBlank() || partidoDTO.getPaisVisitante().isBlank()){
-            ResponseEntity.badRequest().body("El partido necesita fecha, hora, pais local y pais visitante");
+        if(partidoDTO.getFecha() == null || partidoDTO.getHora() == null || partidoDTO.getPaisLocal() == null || partidoDTO.getPaisVisitante() == null){
+             return ResponseEntity.badRequest().body("El partido necesita fecha, hora, pais local y pais visitante");
         }
         if(paisService.findById(partidoDTO.getPaisLocal()).isPresent() && paisService.findById(partidoDTO.getPaisVisitante()).isPresent()){
             if (partidoDTO.getGoles_pais_local() == null) {
@@ -76,8 +76,7 @@ public class PartidoController {
             if (partidoDTO.getGoles_pais_visitante() == null) {
                 partidoDTO.setGoles_pais_visitante(-1);
             }
-            partidoService.savePartido(idPartido, partidoDTO.getFecha(), partidoDTO.getHora(), partidoDTO.getPaisLocal(), partidoDTO.getPaisVisitante(), partidoDTO.getGoles_pais_local(), partidoDTO.getGoles_pais_visitante());
-            idPartido += 1;
+            partidoService.savePartido( partidoDTO.getFecha(), partidoDTO.getHora(), partidoDTO.getPaisLocal(), partidoDTO.getPaisVisitante(), partidoDTO.getGoles_pais_local(), partidoDTO.getGoles_pais_visitante());
             return ResponseEntity.created(new URI("/partido/save")).build();
         }
         return ResponseEntity.badRequest().body("Los paises deben estar previamente cargados");

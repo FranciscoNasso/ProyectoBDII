@@ -6,7 +6,7 @@ CREATE TABLE Pais(
 );
 
 CREATE TABLE Partido(
-    id INT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fecha DATE,
     hora TIME,
     id_pais_local VARCHAR(50),
@@ -31,7 +31,11 @@ CREATE TABLE Administradores(
 
 CREATE TABLE Participante(
     id INT PRIMARY KEY,
+    campeon VARCHAR(50),
+    subcampeon VARCHAR(50),
     FOREIGN KEY (id) REFERENCES Usuario(id)
+    FOREIGN KEY (campeon) REFERENCES Pais(nombre),
+    FOREIGN KEY (subcampeon) REFERENCES Pais(nombre)
 );
 
 CREATE TABLE Prediccion(
