@@ -1,9 +1,9 @@
 package com.example.APIProyectoBDII.Persistence.Impl;
 
-import com.example.APIProyectoBDII.Entities.Administradores;
+import com.example.APIProyectoBDII.Entities.Administrador;
 import com.example.APIProyectoBDII.Entities.Usuario;
 import com.example.APIProyectoBDII.Persistence.IAdministradorDAO;
-import com.example.APIProyectoBDII.Repository.IAdministradores;
+import com.example.APIProyectoBDII.Repository.IAdministrador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,28 +14,28 @@ import java.util.Optional;
 public class AdministradorDAOImpl implements IAdministradorDAO {
 
     @Autowired
-    private IAdministradores adminstradorRepository;
+    private IAdministrador administradorRepository;
 
     @Override
-    public List<Administradores> findAll() {
-        return adminstradorRepository.findAllAdmin();
+    public List<Administrador> findAll() {
+        return administradorRepository.findAllAdmin();
     }
 
     @Override
-    public Optional<Administradores> findById(Integer id) {
-        return adminstradorRepository.getAdminById(id);
+    public Optional<Administrador> findById(Integer id) {
+        return administradorRepository.getAdminById(id);
     }
 
     @Override
     public void save(int id) {
-        adminstradorRepository.crearAdministrador(id);
+        administradorRepository.crearAdministrador(id);
     }
 
     @Override
     public void delete(int id) {
-        adminstradorRepository.deleteAdminById(id);
+        administradorRepository.deleteAdminById(id);
     }
-import com.example.APIProyectoBDII.Repository.IAdministrador;
+
     @Override
     public int checkExistence(Integer ci) {
         return administradorRepository.checkExistence(ci);

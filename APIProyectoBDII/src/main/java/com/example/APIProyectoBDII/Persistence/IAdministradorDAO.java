@@ -1,7 +1,5 @@
 package com.example.APIProyectoBDII.Persistence;
 
-import com.example.APIProyectoBDII.Entities.Administradores;
-import com.example.APIProyectoBDII.Entities.Usuario;
 import com.example.APIProyectoBDII.Entities.Administrador;
 
 import java.util.List;
@@ -9,9 +7,9 @@ import java.util.Optional;
 
 public interface IAdministradorDAO {
 
-    List<Administradores> findAll();
+    List<Administrador> findAll();
 
-    Optional<Administradores> findById(Integer id);
+    Optional<Administrador> findById(Integer id);
 
     public void save(int id);
 

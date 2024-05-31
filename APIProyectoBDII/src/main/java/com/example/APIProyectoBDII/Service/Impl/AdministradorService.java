@@ -1,12 +1,10 @@
 package com.example.APIProyectoBDII.Service.Impl;
 
-import com.example.APIProyectoBDII.Entities.Administradores;
-import com.example.APIProyectoBDII.Entities.Usuario;
+import com.example.APIProyectoBDII.Entities.Administrador;
+
 import com.example.APIProyectoBDII.Persistence.IAdministradorDAO;
 import com.example.APIProyectoBDII.Service.IAdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.example.APIProyectoBDII.Entities.Administrador;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,12 +18,12 @@ public class AdministradorService implements IAdministradorService {
     private IAdministradorDAO administradorDAO;
 
     @Override
-    public List<Administradores> findAll() {
+    public List<Administrador> findAll() {
         return administradorDAO.findAll();
     }
 
     @Override
-    public Optional<Administradores> findById(Integer id) {
+    public Optional<Administrador> findById(Integer id) {
         return administradorDAO.findById(id);
     }
 
@@ -37,6 +35,8 @@ public class AdministradorService implements IAdministradorService {
     @Override
     public void delete(int id) {
         administradorDAO.delete(id);
+    }
+
     public int checkExistence(Integer id) {
         return administradorDAO.checkExistence(id);
     }

@@ -21,12 +21,11 @@ CREATE TABLE Usuario(
     id INT PRIMARY KEY,
     nombre VARCHAR(50),
     apellido VARCHAR(50),
-    email VARCHAR(50)
     email VARCHAR(50),
     jwt VARCHAR(255)
 );
 
-CREATE TABLE Administradores(
+CREATE TABLE Administrador(
     id INT PRIMARY KEY,
     FOREIGN KEY (id) REFERENCES Usuario(id)
 );
@@ -35,7 +34,6 @@ CREATE TABLE Participante(
     id INT PRIMARY KEY,
     campeon VARCHAR(50),
     subcampeon VARCHAR(50),
-    FOREIGN KEY (id) REFERENCES Usuario(id)
     FOREIGN KEY (id) REFERENCES Usuario(id),
     FOREIGN KEY (campeon) REFERENCES Pais(nombre),
     FOREIGN KEY (subcampeon) REFERENCES Pais(nombre)

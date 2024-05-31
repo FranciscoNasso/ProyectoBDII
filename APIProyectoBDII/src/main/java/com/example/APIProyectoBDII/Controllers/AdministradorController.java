@@ -2,7 +2,7 @@ package com.example.APIProyectoBDII.Controllers;
 
 import com.example.APIProyectoBDII.Controllers.DTO.AdministradorDTO;
 import com.example.APIProyectoBDII.Controllers.DTO.UsuarioDTO;
-import com.example.APIProyectoBDII.Entities.Administradores;
+import com.example.APIProyectoBDII.Entities.Administrador;
 import com.example.APIProyectoBDII.Entities.Usuario;
 import com.example.APIProyectoBDII.Service.IAdministradorService;
 import com.example.APIProyectoBDII.Service.IUsuarioService;
@@ -28,10 +28,10 @@ public class AdministradorController {
 
     @GetMapping("/findall")
     public ResponseEntity<?> findAllAdmin(){
-        List<Administradores> administradores = administradorService.findAll();
+        List<Administrador> administradores = administradorService.findAll();
         List<AdministradorDTO> administradorDTO = new ArrayList<>();
         List<UsuarioDTO> usuarioMostrar = new ArrayList<>();
-        for (Administradores admin : administradores) {
+        for (Administrador admin : administradores) {
             AdministradorDTO adminDTO = AdministradorDTO.builder()
                     .id(admin.getId())
                     .build();
@@ -54,7 +54,7 @@ public class AdministradorController {
 
     @GetMapping("/find/{id}")
     public ResponseEntity<?> getAdministradorById(@PathVariable int id){
-        Optional <Administradores> administradorOptional = administradorService.findById(id);
+        Optional <Administrador> administradorOptional = administradorService.findById(id);
         if (administradorOptional.isPresent()) {
             Optional<Usuario> usuarioOptional = usuarioService.findById(administradorOptional.get().getId());
             Usuario usuario = usuarioOptional.get();
