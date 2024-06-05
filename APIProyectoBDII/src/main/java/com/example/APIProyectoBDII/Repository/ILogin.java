@@ -23,4 +23,10 @@ public interface ILogin extends CrudRepository<Login, Long> {
 
     @Query(value = "SELECT contrasenia FROM Login WHERE Login.ci = ?1", nativeQuery = true)
     public String getContrasenia(Integer ci);
+
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO Login (ci, contrasenia) VALUES (:ci, :contrasenia)", nativeQuery = true)
+    public int save(Integer ci, String contrasenia);
+
 }

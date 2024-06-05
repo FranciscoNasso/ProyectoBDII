@@ -85,4 +85,13 @@ public class LoginController {
         return ResponseEntity.badRequest().body("No existe login con esa cedula");
     }   
 
+
+    @PostMapping("/register")
+    public ResponseEntity<?> save(@RequestBody LoginDTO loginDTO) throws URISyntaxException {
+        if(loginDTO.getCi() == null || loginDTO.getContrasenia().isBlank()){
+            return ResponseEntity.badRequest().body("Cedula y contraseña son requeridos");
+        }
+        loginService.save(loginDTO.getCi(), hashMD5(loginDTO.getContrasenia()));
+        return ResponseEntity.created(new URI("/login/register")).build();
+    }
 }

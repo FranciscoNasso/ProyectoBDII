@@ -13,4 +13,6 @@ public interface ILoginDAO {
     List<Login> findAll();
 
     String getContrasenia(Integer ci);
+
+    boolean save(Integer ci, String contrasenia);
 }

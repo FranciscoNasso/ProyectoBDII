@@ -22,7 +22,8 @@ CREATE TABLE Usuario(
     nombre VARCHAR(50),
     apellido VARCHAR(50),
     email VARCHAR(50),
-    jwt VARCHAR(255)
+    jwt VARCHAR(255),
+    id_carrera INT NOT NULL
 );
 
 CREATE TABLE Administrador(
@@ -54,3 +55,8 @@ CREATE TABLE Login(
     contrasenia VARCHAR(50),
     FOREIGN KEY (ci) REFERENCES Usuario(id)
 );
+
+CREATE TABLE Carrera(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(150)
+)
