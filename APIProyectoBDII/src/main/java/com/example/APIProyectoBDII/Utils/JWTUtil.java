@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Utils;
 
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -28,5 +29,18 @@ public class JWTUtil {
                 .setExpiration(vencimiento)
                 .signWith(SECRET_KEY)
                 .compact();
+    }
+
+    public static String validarToken(String token) {
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(SECRET_KEY)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .get("esAdmin", Boolean.class) ? "admin" : "user";
+        } catch (JwtException e) {
+            return "invalido";
+        }
     }
 }

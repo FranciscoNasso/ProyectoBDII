@@ -12,4 +12,6 @@ public interface ILoginService {
     Optional<Login> findById(Integer ci);
 
     String getContrasenia(Integer ci);
+
+    boolean save(Integer ci, String hashMD5);
 }

@@ -12,7 +12,7 @@ public interface IUsuarioDAO {
 
     Optional<Usuario> findById(Integer id);
 
-    public void save ( int id, String usuario, String apellido, String email);
+    public void save ( int id, String usuario, String apellido, String email, Integer id_carrera);
 
     public void delete (Integer id);
 

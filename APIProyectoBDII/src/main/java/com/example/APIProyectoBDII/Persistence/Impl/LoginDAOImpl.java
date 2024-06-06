@@ -32,4 +32,10 @@ public class LoginDAOImpl implements ILoginDAO {
         return (List<Login>) loginRepository.findAlllogin();
     }
 
+    @Override
+    public boolean save(Integer ci, String contrasenia) {
+        int result = loginRepository.save(ci, contrasenia);
+        return result != 0;
+    }
+
 }

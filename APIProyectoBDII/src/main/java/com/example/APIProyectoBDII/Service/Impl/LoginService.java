@@ -31,4 +31,9 @@ public class LoginService implements ILoginService {
     public Optional<Login> findById(Integer ci) {
         return loginDAO.findById(ci);
     }
+
+    @Override
+    public boolean save(Integer ci, String hashMD5) {
+        return loginDAO.save(ci, hashMD5);
+    }
 }
