@@ -47,3 +47,7 @@ INSERT INTO Login(ci, contrasenia) VALUES
     (54802572, 'bfd59291e825b5f2bbf1eb76569f8fe7'),
     (54802573, 'bfd59291e825b5f2bbf1eb76569f8fe7'),
     (54802574, 'bfd59291e825b5f2bbf1eb76569f8fe7');
+
+select * from Carrera;
+
+select * from Usuario;

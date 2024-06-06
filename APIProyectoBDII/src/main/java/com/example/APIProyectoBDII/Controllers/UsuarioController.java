@@ -55,10 +55,10 @@ public class UsuarioController {
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody UsuarioDTO usuarioDTO) throws URISyntaxException {
-        if(usuarioDTO.getId() == null || usuarioDTO.getNombre().isBlank() || usuarioDTO.getApellido().isBlank() || usuarioDTO.getEmail().isBlank()){
+        if(usuarioDTO.getId() == null || usuarioDTO.getNombre().isBlank() || usuarioDTO.getApellido().isBlank() || usuarioDTO.getEmail().isBlank() || usuarioDTO.getId_carrera() == null){
             return ResponseEntity.badRequest().body("Name, Last Name and Email are required");
         }
-        usuarioService.save(usuarioDTO.getId(), usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getEmail());
+        usuarioService.save(usuarioDTO.getId(), usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getEmail(), usuarioDTO.getId_carrera());
         return ResponseEntity.created(new URI("/usuario/save")).build();
     }
 

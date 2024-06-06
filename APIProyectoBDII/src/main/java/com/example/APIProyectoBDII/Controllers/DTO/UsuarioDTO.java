@@ -15,4 +15,5 @@ public class UsuarioDTO {
     private String nombre;
     private String apellido;
     private String email;
+    private Integer id_carrera;
 }

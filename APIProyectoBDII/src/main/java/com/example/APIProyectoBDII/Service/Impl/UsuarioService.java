@@ -28,8 +28,8 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public void save(int id, String nombre, String apellido, String email) {
-        usuarioDAO.save(id, nombre, apellido, email);
+    public void save(int id, String nombre, String apellido, String email, Integer id_carrera) {
+        usuarioDAO.save(id, nombre, apellido, email, id_carrera);
 
     }
 
