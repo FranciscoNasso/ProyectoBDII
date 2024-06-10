@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -35,15 +36,16 @@ public class LoginController {
     private String hashMD5(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] messageDigest = md.digest(input.getBytes());
-
-            StringBuilder sb = new StringBuilder();
+            byte[] messageDigest = md.digest(input.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
             for (byte b : messageDigest) {
-                sb.append(String.format("%02x", b));
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
             }
-            return sb.toString();
+            return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("MD5 algorithm not found", e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -61,8 +63,8 @@ public class LoginController {
         return ResponseEntity.ok(loginDTOList);
     }
 
-    @GetMapping("/find/{ci}")
-    public ResponseEntity<?> findById(@PathVariable Integer ci, @RequestParam String contrasenia){
+    @PostMapping("/find/{ci}")
+    public ResponseEntity<?> findById(@PathVariable Integer ci, @RequestBody String contrasenia){
         Optional<Login> loginOptional = loginService.findById(ci);
         if(loginOptional.isPresent()){
             Login login = loginOptional.get();
@@ -73,12 +75,10 @@ public class LoginController {
                         .contrasenia(contrasenia)
                         .build();
                 String jwt = JWTUtil.generarJWT(loginDTO.getCi(), loginDTO.getContrasenia(), esAdmin != 0);
-                // TODO guardar jwt en la base de datos
                 usuarioService.setJWT(ci, jwt);
                 return ResponseEntity.ok(jwt);
-                // return ResponseEntity.ok(loginDTO.toString() + "\nEs admin: " + (esAdmin != 0 ? "Si" : "No"));
             } else {
-                return ResponseEntity.badRequest().body("Contraseña incorrecta");
+                return ResponseEntity.badRequest().body("Contraseña incorrecta"+contrasenia+"------ "+loginService.getContrasenia(ci)+"<--->"+hashMD5(contrasenia)+hashMD5(contrasenia));
             }
         }
         
