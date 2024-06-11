@@ -20,17 +20,19 @@ export class LoginComponent {
     });
   }
 
-  onSubmit(): void {
-    this.loginService.login(this.registerForm.value.username, this.registerForm.value.password).subscribe(
-      response => {
-        // Navegar a la página de inicio
+  async onSubmit(): Promise<void> {
+    const { username, password } = this.registerForm.value;
+
+    console.log(`Attempting to login with username: ${username}`);
+
+    try {
+        const response = await this.loginService.login(username, password);
         console.log('Login successful', response);
-        //this.router.navigate(['/home']);
-      },
-      error => {
-        console.error(error);
+        this.router.navigate(['/home']);
+        alert('Valid credentials');
+    } catch (error) {
+        console.error('Login failed', error);
         alert('Invalid credentials');
-      }
-    );
+    }
   }
 }

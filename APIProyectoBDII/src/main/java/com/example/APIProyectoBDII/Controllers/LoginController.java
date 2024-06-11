@@ -72,13 +72,13 @@ public class LoginController {
                 int esAdmin = administradoresService.checkExistence(ci);
                 LoginDTO loginDTO = LoginDTO.builder()
                         .ci(login.getId())
-                        .contrasenia(contrasenia)
+                        .contrasenia(hashMD5(contrasenia))
                         .build();
                 String jwt = JWTUtil.generarJWT(loginDTO.getCi(), loginDTO.getContrasenia(), esAdmin != 0);
                 usuarioService.setJWT(ci, jwt);
                 return ResponseEntity.ok(jwt);
             } else {
-                return ResponseEntity.badRequest().body("Contraseña incorrecta"+contrasenia+"------ "+loginService.getContrasenia(ci)+"<--->"+hashMD5(contrasenia)+hashMD5(contrasenia));
+                return ResponseEntity.badRequest().body("Contraseña incorrecta"+contrasenia+"------ "+loginService.getContrasenia(ci)+"<--->"+hashMD5(contrasenia));
             }
         }
         

@@ -28,14 +28,14 @@ export class LoginService {
       .pipe(
         map(response => {
           // Manejar la respuesta y guardar el token en localStorage
-          if (response && response.token) {
-            localStorage.setItem('token', response.token);
+          if (response) {
+            localStorage.setItem('token', response.body);
           }
           return response;
         }),
         catchError(error => {
           console.error(error);
-          throw new Error('Invalid credentials');
+          throw new Error('Invalid credentialsservicets');
         })
       );
   }
