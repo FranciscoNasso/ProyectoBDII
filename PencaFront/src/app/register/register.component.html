@@ -37,20 +37,21 @@
         </div>
         <div class="mb-4">
           <div class="relative">
-            <input
+            <select
               class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="carrera"
-              type="text"
-              placeholder="Selecciona una carrera"
               formControlName="carrera"
             >
+              <option value="" disabled selected>Selecciona una carrera</option>
+              <option *ngFor="let carrera of carreras" [value]="carrera.id">{{ carrera.nombre }}</option>
+            </select>
             <label class="absolute top-0 left-2 -mt-2 text-gray-600 text-xs" for="carrera">
               Carrera
             </label>
             <div *ngIf="registerForm.get('carrera')?.invalid && registerForm.get('carrera')?.touched" class="text-red-500 text-xs mt-1">
               Carrera es requerido.
             </div>
-          </div>
+          </div>          
         </div>
         <div class="mb-4">
           <div class="relative">
