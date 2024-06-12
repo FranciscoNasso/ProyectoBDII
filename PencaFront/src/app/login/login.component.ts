@@ -25,14 +25,16 @@ export class LoginComponent {
 
     console.log(`Attempting to login with username: ${username}`);
 
-    try {
-        const response = await this.loginService.login(username, password);
-        console.log('Login successful', response);
-        this.router.navigate(['/home']);
-        alert('Valid credentials');
-    } catch (error) {
-        console.error('Login failed', error);
-        alert('Invalid credentials');
-    }
+    this.loginService.login(username, password).subscribe({
+      next: (response) => {
+          console.log('Login successful', response);
+          // this.router.navigate(['/home']);
+          alert('Valid credentials');
+      },
+      error: (error) => {
+          console.error('Login failed', error);
+          alert('Invalid credentials');
+      }
+  });
   }
 }

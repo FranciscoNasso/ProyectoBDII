@@ -8,34 +8,42 @@ import { GlobalService } from '../../global.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class RegisterService {
 
-  private loginUrl = this.globalService.API_URL;  // URL de la API de login
+  private api_url = this.globalService.API_URL;
 
   constructor(private http: HttpClient, private globalService: GlobalService) { }
 
-  login(username: string, password: string): Observable<any> {
+  register(id: number, nombre: string, apellido: string, email: string, carrera: number, password: string, campeon: number, subcampeon: number): Observable<any> {
+    console.log('Registering user', nombre);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
     const body = JSON.stringify({
-      ci: username,
-      contrasenia: password
+      id: id,
+      nombre: nombre,
+      apellido: apellido,
+      email: email,
+      carrera: carrera,
+      password: password,
+      campeon: campeon,
+      subcampeon: subcampeon
     });
 
-    return this.http.post<any>(this.loginUrl+"/login/find/"+username, body, { headers: headers })
+    return this.http.post<any>(this.api_url+"/login/register", body, { headers: headers })
       .pipe(
         map(response => {
           // Manejar la respuesta y guardar el token en localStorage
           if (response) {
-            localStorage.setItem('token', response.token);
+            console.log('User registered', response);
+            // localStorage.setItem('token', response.body);
           }
           return response;
         }),
         catchError(error => {
           console.error(error);
-          throw new Error('Invalid credentialsservicets');
+          throw new Error('Error al crear usuario');
         })
       );
   }
