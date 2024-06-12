@@ -7,11 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/carrera")
@@ -26,6 +23,7 @@ public class CarreraController {
         List<CarreraDTO> carreraDTO = new ArrayList<>();
         for (Carrera carrera : carreraes) {
             CarreraDTO carreraDTO1 = CarreraDTO.builder()
+                    .id(carrera.getId())
                     .nombre(carrera.getNombre())
                     .build();
             carreraDTO.add(carreraDTO1);

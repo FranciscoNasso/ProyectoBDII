@@ -30,7 +30,7 @@ public interface IUsuario extends CrudRepository<Usuario, Long> {
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO Usuario (id, nombre, apellido, email, id_carrera) VALUES (:id, :nombre, :apellido, :email, :id_carrera)", nativeQuery = true)
-    public void createuser(@Param("id") int id, @Param("nombre") String nombre, @Param("apellido") String apellido, @Param("email") String email, @Param("id_carrera") Integer id_carrera);
+    public int createuser(@Param("id") int id, @Param("nombre") String nombre, @Param("apellido") String apellido, @Param("email") String email, @Param("id_carrera") Integer id_carrera);
 
     @Modifying
     @Transactional
