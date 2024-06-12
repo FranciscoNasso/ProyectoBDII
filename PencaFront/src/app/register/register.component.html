@@ -1,24 +1,58 @@
-<div class="flex justify-center items-center min-h-[600px]">
+<div class="flex justify-center items-center min-h-[600px] mt-4">
     <div class="bg-white shadow-md border rounded-xl px-8 pt-6 pb-8 mb-4">
       <h2 class="text-3xl font-bold mb-6 text-center">Registro</h2>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-4">
+          <div class="relative">
+            <input
+              class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="documento"
+              type="number"
+              placeholder="12345678"
+              formControlName="documento"
+            >
+            <label class="absolute top-0 left-2 -mt-2 text-gray-600 text-xs" for="documento">
+              Nro. de documento
+            </label>
+            <div *ngIf="registerForm.get('documento')?.invalid && registerForm.get('documento')?.touched" class="text-red-500 text-xs mt-1">
+              <div *ngIf="registerForm.get('documento')?.errors?.['required']">Documento es requerido.</div>
+            </div>
+          </div>          
+        </div>
         <div class="mb-4 flex gap-2">
           <div class="relative w-full lg:w-1/2">
             <input
               class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="nombre"
               type="text"
-              placeholder="Juan Perez"
+              placeholder="Juan"
               formControlName="nombre"
             >
             <label class="absolute top-0 left-2 -mt-2 text-gray-600 text-xs" for="nombre">
-              Nombre y apellido
+              Nombre
             </label>
             <div *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched" class="text-red-500 text-xs mt-1">
               Nombre es requerido.
             </div>
           </div>
           <div class="relative w-full lg:w-1/2">
+            <input
+              class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="apellido"
+              type="text"
+              placeholder="Perez"
+              formControlName="apellido"
+            >
+            <label class="absolute top-0 left-2 -mt-2 text-gray-600 text-xs" for="email">
+              Apellido
+            </label>
+            <div *ngIf="registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched" class="text-red-500 text-xs mt-1">
+              <div *ngIf="registerForm.get('apellido')?.errors?.['required']">Apellido es requerido.</div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <div class="relative">
             <input
               class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
@@ -33,7 +67,7 @@
               <div *ngIf="registerForm.get('email')?.errors?.['required']">Email es requerido.</div>
               <div *ngIf="registerForm.get('email')?.errors?.['email']">Email no es válido.</div>
             </div>
-          </div>
+          </div>          
         </div>
         <div class="mb-4">
           <div class="relative">
@@ -50,6 +84,42 @@
             </label>
             <div *ngIf="registerForm.get('carrera')?.invalid && registerForm.get('carrera')?.touched" class="text-red-500 text-xs mt-1">
               Carrera es requerido.
+            </div>
+          </div>          
+        </div>
+        <div class="mb-4">
+          <div class="relative">
+            <select
+              class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="campeon"
+              formControlName="campeon"
+            >
+              <option value="" disabled selected>Selecciona un campeon</option>
+              <option *ngFor="let pais of paises" [value]="pais.nombre">{{ pais.nombre }}</option>
+            </select>
+            <label class="absolute top-0 left-2 -mt-2 text-gray-600 text-xs" for="campeon">
+              Campeon
+            </label>
+            <div *ngIf="registerForm.get('campeon')?.invalid && registerForm.get('campeon')?.touched" class="text-red-500 text-xs mt-1">
+              Campeon es requerido.
+            </div>
+          </div>          
+        </div>
+        <div class="mb-4">
+          <div class="relative">
+            <select
+              class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="subCamepon"
+              formControlName="subCamepon"
+            >
+              <option value="" disabled selected>Selecciona un sub-campeon</option>
+              <option *ngFor="let pais of paises" [value]="pais.nombre">{{ pais.nombre }}</option>
+            </select>
+            <label class="absolute top-0 left-2 -mt-2 text-gray-600 text-xs" for="subCamepon">
+              Sub-campeon
+            </label>
+            <div *ngIf="registerForm.get('subCamepon')?.invalid && registerForm.get('subCamepon')?.touched" class="text-red-500 text-xs mt-1">
+              Sub-campeon es requerido.
             </div>
           </div>          
         </div>
@@ -91,7 +161,7 @@
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
             type="submit"
-            [disabled]="registerForm.invalid"
+            [disabled]="false"
           >
             Registrarse
           </button>

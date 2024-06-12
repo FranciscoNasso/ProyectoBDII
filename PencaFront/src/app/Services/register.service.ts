@@ -31,6 +31,8 @@ export class RegisterService {
       subcampeon: subcampeon
     });
 
+    console.log('Registering user', body)
+
     return this.http.post<any>(this.api_url+"/login/register", body, { headers: headers })
       .pipe(
         map(response => {
