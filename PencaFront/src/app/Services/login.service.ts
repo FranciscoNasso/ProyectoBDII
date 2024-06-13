@@ -31,6 +31,7 @@ export class LoginService {
           if (response) {
             localStorage.setItem('token', response.token);
           }
+          console.log(response);
           return response;
         }),
         catchError(error => {
