@@ -11,4 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ParticipanteDTO {
     private Integer id;
+    private String campeon;
+    private String subcampeon;
 }

@@ -66,6 +66,7 @@ export class RegisterComponent implements OnInit {
     
     console.log(`Attempting to register user: ${nombre}`);
 
+
     this.registerService.register(documento, nombre, apellido, email, carrera, password, campeon, subCamepon).subscribe({
       next: (response) => {
         console.log('Register successful', response);

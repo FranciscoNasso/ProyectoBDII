@@ -26,8 +26,8 @@ public class ParticipanteDAOImpl implements IParticipanteDAO {
     }
 
     @Override
-    public void save(int id) {
-        participanteRepository.crearPart(id);
+    public int save(int id, String campeon, String subcampeon) {
+        return participanteRepository.crearPart(id, campeon, subcampeon);
     }
 
     @Override

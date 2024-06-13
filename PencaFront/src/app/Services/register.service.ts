@@ -14,7 +14,7 @@ export class RegisterService {
 
   constructor(private http: HttpClient, private globalService: GlobalService) { }
 
-  register(id: number, nombre: string, apellido: string, email: string, carrera: number, password: string, campeon: number, subcampeon: number): Observable<any> {
+  register(id: number, nombre: string, apellido: string, email: string, carrera: number, password: string, campeon: string, subcampeon: string): Observable<any> {
     console.log('Registering user', nombre);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'

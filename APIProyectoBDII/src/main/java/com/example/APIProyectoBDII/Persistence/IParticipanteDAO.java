@@ -11,7 +11,7 @@ public interface IParticipanteDAO {
 
     Optional<Participante> findById(Integer id);
 
-    public void save(int id);
+    public int save(int id, String campeon, String subcampeon);
 
     void delete(int id);
 }

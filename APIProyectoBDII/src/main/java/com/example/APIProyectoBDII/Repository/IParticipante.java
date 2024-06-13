@@ -27,6 +27,6 @@ public interface IParticipante extends CrudRepository<Participante, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO Participante (id) VALUES (:id)", nativeQuery = true)
-    public void crearPart(@Param("id") int id);
+    @Query(value = "INSERT INTO Participante (id, campeon, subcampeon) VALUES (:id, :campeon, :subcampeon)", nativeQuery = true)
+    public int crearPart(@Param("id") int id, @Param("campeon") String campeon, @Param("subcampeon") String subcampeon);
 }

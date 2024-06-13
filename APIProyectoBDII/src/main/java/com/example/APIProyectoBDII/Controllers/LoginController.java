@@ -1,16 +1,20 @@
 package com.example.APIProyectoBDII.Controllers;
 
 import com.example.APIProyectoBDII.Controllers.DTO.LoginDTO;
+import com.example.APIProyectoBDII.Controllers.DTO.ParticipanteDTO;
 import com.example.APIProyectoBDII.Controllers.DTO.LoginDTO.LoginDTOBuilder;
 import com.example.APIProyectoBDII.Controllers.DTO.UsuarioDTO;
 import com.example.APIProyectoBDII.Entities.Login;
 import com.example.APIProyectoBDII.Repository.IAdministrador;
 import com.example.APIProyectoBDII.Service.ILoginService;
+import com.example.APIProyectoBDII.Service.IParticipanteService;
 import com.example.APIProyectoBDII.Service.IUsuarioService;
 import com.example.APIProyectoBDII.Service.IAdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
+import org.apache.commons.codec.cli.Digest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -35,22 +39,11 @@ public class LoginController {
     private IAdministradorService administradoresService;
     @Autowired
     private IUsuarioService usuarioService;
+    @Autowired
+    private IParticipanteService participanteService;
 
     private String hashMD5(String input) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] messageDigest = md.digest(input.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : messageDigest) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1)
-                    hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+        return org.apache.commons.codec.digest.DigestUtils.md5Hex(input);
     }
 
     @GetMapping("/findAll")
@@ -68,7 +61,8 @@ public class LoginController {
     }
 
     @PostMapping("/find/{ci}")
-    public ResponseEntity<?> findById(@PathVariable Integer ci, @RequestBody String contrasenia) {
+    public ResponseEntity<?> findById(@PathVariable Integer ci, @RequestBody Map<String, String> body) {
+        String contrasenia = body.get("contrasenia");
         String hashedPass = hashMD5(contrasenia);
         Optional<Login> loginOptional = loginService.findById(ci);
         if (loginOptional.isPresent()) {
@@ -83,8 +77,8 @@ public class LoginController {
                 usuarioService.setJWT(ci, jwt);
                 return ResponseEntity.ok("{\"token\": \"" + jwt + "\"}");
             } else {
-                return ResponseEntity.badRequest().body("Contraseña incorrecta" + contrasenia + "------ "
-                        + loginService.getContrasenia(ci) + "<--->" + hashedPass + "<---->" + hashMD5(contrasenia));
+                return ResponseEntity.badRequest().body("Contraseña incorrecta: " + contrasenia + "\nmismatch:   "
+                        + loginService.getContrasenia(ci) + "<--->" + hashedPass);
             }
         }
 
@@ -95,19 +89,22 @@ public class LoginController {
     public ResponseEntity<?> save(@RequestBody Map<String, String> body) throws URISyntaxException {
         // Validar los campos requeridos
         System.out.println("Entró al endpoint de registro de usuario");
-        if (!body.containsKey("id") 
+        if (!body.containsKey("id")
                 || body.get("id") == null
-                || !body.containsKey("password") 
                 || !body.containsKey("password")
-                || body.get("nombre") == null 
+                || !body.containsKey("password")
+                || body.get("nombre") == null
                 || !body.containsKey("nombre")
-                || body.get("apellido") == null 
+                || body.get("apellido") == null
                 || !body.containsKey("apellido")
                 || body.get("email") == null
                 || !body.containsKey("email")
                 || body.get("carrera") == null
                 || !body.containsKey("carrera")
-            ) {
+                || body.get("campeon") == null
+                || !body.containsKey("campeon")
+                || body.get("subcampeon") == null
+                || !body.containsKey("subcampeon")) {
             return ResponseEntity.badRequest().body("Hay datos faltantes en el registro");
         }
         System.out.println(body.toString());
@@ -124,14 +121,31 @@ public class LoginController {
         usuarioDTO.setApellido(body.get("apellido") != null ? body.get("apellido").toString() : null);
         usuarioDTO.setEmail(body.get("email") != null ? body.get("email").toString() : null);
         usuarioDTO.setId_carrera(body.get("carrera") != null ? Integer.parseInt(body.get("carrera").trim()) : null);
-        // guardar usuario en la base de datos y recien despues guardar login
+
+        // Crear ParticipanteDTO
+        ParticipanteDTO participanteDTO = new ParticipanteDTO();
+        participanteDTO.setId(Integer.parseInt(body.get("id").trim()));
+        participanteDTO.setCampeon(body.get("campeon") != null ? body.get("campeon").toString() : null);
+        participanteDTO.setSubcampeon(body.get("subcampeon") != null ? body.get("subcampeon").toString() : null);
+
+        // guardar usuario en la base de datos y recien despues guardar en participante
+        // y en login
         int result = usuarioService.save(usuarioDTO.getId(), usuarioDTO.getNombre(), usuarioDTO.getApellido(),
                 usuarioDTO.getEmail(), usuarioDTO.getId_carrera());
         if (result == 0) {
             return ResponseEntity.badRequest().body("No se pudo registrar el usuario");
         } else {
-            loginService.save(loginDTO.getCi(), loginDTO.getContrasenia());
+            result = participanteService.save(participanteDTO.getId(), participanteDTO.getCampeon(),
+                    participanteDTO.getSubcampeon());
+            if (result == 0) {
+                return ResponseEntity.badRequest().body("No se pudo registrar el participante");
+            } else {
+                loginService.save(loginDTO.getCi(), loginDTO.getContrasenia());
+            }
         }
+        // return ResponseEntity.ok(loginDTO.toString() + participanteDTO.toString() +
+        // usuarioDTO.toString());
+        System.out.println(participanteDTO.toString());
         return ResponseEntity.created(new URI("/login/register")).build();
     }
 }

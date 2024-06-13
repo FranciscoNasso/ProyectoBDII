@@ -78,7 +78,7 @@ public class ParticipanteController {
             return ResponseEntity.badRequest().body("Se requiere un id para guardar el Participante");
         }
         if(usuarioService.findById(participanteDTO.getId()).isPresent()){
-            participanteService.save(participanteDTO.getId());
+            participanteService.save(participanteDTO.getId(), participanteDTO.getCampeon(), participanteDTO.getSubcampeon());
             return ResponseEntity.created(new URI("/participante/save")).build();
         }
         return ResponseEntity.badRequest().body("El usuario debe estar registrado previamente");
