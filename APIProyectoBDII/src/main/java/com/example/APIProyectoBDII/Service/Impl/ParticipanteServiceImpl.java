@@ -25,8 +25,8 @@ public class ParticipanteServiceImpl implements IParticipanteService {
     }
 
     @Override
-    public void save(int id) {
-        participanteDAO.save(id);
+    public int save(int id, String campeon, String subcampeon) {
+        return participanteDAO.save(id, campeon, subcampeon);
     }
 
     @Override

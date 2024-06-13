@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
 
     console.log(`Attempting to register user: ${nombre}`);
 
-    this.registerService.register( /* ci-> */123, nombre, /* apellido-> */"añañin", email, carrera, password, /* id de campeon-> */1, /* id de subcampeon-> */2).subscribe({
+    this.registerService.register( /* ci-> */1234, nombre, /* apellido-> */"añañin", email, carrera, password, /* campeon-> */"Uruguay", /* subcampeon-> */"Argentina").subscribe({
       next: (response) => {
         console.log('Register successful', response);
         // this.router.navigate(['/home']);
