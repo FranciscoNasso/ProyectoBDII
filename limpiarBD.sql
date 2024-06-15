@@ -1,0 +1,11 @@
+USE Campeonato;
+SET FOREIGN_KEY_CHECKS = 0;
+DELETE FROM Prediccion;
+DELETE FROM Participante;
+DELETE FROM Administrador;
+DELETE FROM Login;
+DELETE FROM Usuario;
+DELETE FROM Partido;
+DELETE FROM Pais;
+DELETE FROM Carrera;
+SET FOREIGN_KEY_CHECKS = 1;
