@@ -1,0 +1,45 @@
+<div class="flex flex-col items-center justify-center h-screen">
+    <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
+        <div *ngIf="this.modify">
+            <div class="mb-4">
+                <label class="text-gray-600">Nombre:</label>
+                <input type="text" class="text-gray-900" [(ngModel)]="user.nombre">
+            </div>
+            <div class="mb-4">
+                <label class="text-gray-600">Apellido:</label>
+                <input type="text" class="text-gray-900" [(ngModel)]="user.apellido">
+            </div>
+            <div class="mb-4">
+                <label class="text-gray-600">Email:</label>
+                <input type="email" class="text-gray-900" [(ngModel)]="user.email">
+            </div>
+            <div class="mb-4">
+                <label class="text-gray-600">Posición en la tabla:</label>
+                <input type="number" class="text-gray-900" [(ngModel)]="user.posicion">
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="toggleModify()">Cancelar</button>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Modificar</button>
+        </div>
+
+        <div #userDetails *ngIf="!this.modify">
+            <div class="mb-4">
+                <label class="text-gray-600">Nombre:</label>
+                <p class="text-gray-900">{{ user.nombre }}</p>
+            </div>
+            <div class="mb-4">
+                <label class="text-gray-600">Apellido:</label>
+                <p class="text-gray-900">{{ user.apellido }}</p>
+            </div>
+            <div class="mb-4">
+                <label class="text-gray-600">Email:</label>
+                <p class="text-gray-900">{{ user.email }}</p>
+            </div>
+            <div class="mb-4">
+                <label class="text-gray-600">Posición en la tabla:</label>
+                <p class="text-gray-900">{{ user.posicion}}</p>
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                (click)="toggleModify()">Modificar</button>
+        </div>
+    </div>
+</div>

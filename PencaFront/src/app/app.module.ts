@@ -10,6 +10,10 @@ import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { UserComponent } from './user/user.component';
+import { PosicionesComponent } from './posiciones/posiciones.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { FormsModule } from '@angular/forms';
     PartidosComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserComponent,
+    PosicionesComponent,
+    MainLayoutComponent,
+    AdminLayoutComponent
   ],
   imports: [
     FormsModule,  

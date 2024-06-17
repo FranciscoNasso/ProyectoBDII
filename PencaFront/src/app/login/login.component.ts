@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { RegisterComponent } from '../register/register.component';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/global.service';
-import { LoginService } from '../Services/login.service';
+import { LoginService } from '../Services/login/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -15,21 +14,23 @@ export class LoginComponent {
 
   constructor(private loginService: LoginService, private globalService: GlobalService, private router: Router, private fb: FormBuilder) {
     this.registerForm = this.fb.group({
-      username: ['', [Validators.required]],
+      ci: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
   }
 
   async onSubmit(): Promise<void> {
-    const { username, password } = this.registerForm.value;
+    const { ci, password } = this.registerForm.value;
 
-    console.log(`Attempting to login with username: ${username}`);
+    console.log(`Attempting to login with ci: ${ci}`);
 
-    this.loginService.login(username, password).subscribe({
+    this.loginService.login(ci, password).subscribe({
       next: (response) => {
-          console.log('Login successful', response);
+          console.log('Login successful', response.token);
           // this.router.navigate(['/home']);
-          alert('Valid credentials');
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('id_user', ci);
+          alert('Bienvenido!');
       },
       error: (error) => {
           console.error('Login failed', error);
