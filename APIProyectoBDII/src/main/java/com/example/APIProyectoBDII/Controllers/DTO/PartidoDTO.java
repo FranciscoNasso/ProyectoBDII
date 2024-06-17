@@ -20,7 +20,7 @@ public class PartidoDTO {
     private LocalDate fecha;
 
     private LocalTime hora;
-
+    // seguramente tenga que ser cambiado a snake_case
     private String paisLocal;
 
     private String paisVisitante;

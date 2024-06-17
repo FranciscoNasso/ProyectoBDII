@@ -14,16 +14,19 @@ public class Prediccion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_partido")
-    private Partido idPartido;
+    private Partido id_partido;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_participante")
-    private Participante idParticipante;
+    private Participante id_participante;
 
     @Column(name = "goles_pais_local")
-    private Integer golesPaislocal;
+    private Integer goles_pais_local;
 
     @Column(name = "goles_pais_visitante")
-    private Integer golesPaisvisitante;
+    private Integer goles_pais_visitante;
+
+   @Column(name = "puntos")
+   private Integer puntos; 
 
 }
