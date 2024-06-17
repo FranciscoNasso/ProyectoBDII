@@ -36,4 +36,9 @@ public class PartidoService implements IPartidoService {
     public void deletePartido(Integer id) {
         partidoDAO.deletePartido(id);
     }
+
+    @Override
+    public int loadScore(Integer id, Integer goles_pais_local, Integer goles_pais_visitante) {
+        return partidoDAO.loadScore(id, goles_pais_local, goles_pais_visitante);
+    }
 }

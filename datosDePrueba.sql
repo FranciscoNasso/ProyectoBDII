@@ -48,6 +48,9 @@ INSERT INTO Login(ci, contrasenia) VALUES
     (54802573, 'bfd59291e825b5f2bbf1eb76569f8fe7'),
     (54802574, 'bfd59291e825b5f2bbf1eb76569f8fe7');
 
-select * from Carrera;
+INSERT INTO Partido(fecha, hora, id_pais_local, id_pais_visitante) VALUES
+    ('2024-06-15', '15:00:00', 'Uruguay', 'Argentina'),
+    ('2024-06-16', '18:30:00', 'Uruguay', 'Brasil'),
+    ('2024-06-17', '20:45:00', 'Chile', 'Brasil'),
+    ('2024-06-18', '13:00:00', 'Argentina', 'Chile');
 
-select * from Usuario;

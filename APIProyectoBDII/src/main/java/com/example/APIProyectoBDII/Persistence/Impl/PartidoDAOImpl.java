@@ -36,4 +36,9 @@ public class PartidoDAOImpl implements IPartidoDAO {
     public void deletePartido(Integer id) {
         partidoRepository.deletePartidoById(id);
     }
+
+    @Override
+    public int loadScore(Integer id, Integer goles_pais_local, Integer goles_pais_visitante) {
+        return partidoRepository.loadScore(id, goles_pais_local, goles_pais_visitante);
+    }
 }

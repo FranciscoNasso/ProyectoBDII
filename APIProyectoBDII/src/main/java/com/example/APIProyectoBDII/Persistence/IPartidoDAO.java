@@ -16,4 +16,6 @@ public interface IPartidoDAO {
     public void savePartido( LocalDate fecha, LocalTime hora, String partidoLocal, String partidoVisitante, Integer goles_pais_local, Integer goles_pais_visitante);
 
     public void deletePartido(Integer id);
+
+    public int loadScore(Integer id, Integer goles_pais_local, Integer goles_pais_visitante);
 }

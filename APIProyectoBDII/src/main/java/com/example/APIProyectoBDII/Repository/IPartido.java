@@ -31,4 +31,9 @@ public interface IPartido extends CrudRepository<Partido, Long> {
     @Modifying
     @Query(value = "DELETE FROM Partido WHERE Partido.id = ?1", nativeQuery = true)
     public void deletePartidoById(Integer id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE Partido SET goles_pais_local = :goles_pais_local, goles_pais_visitante = :goles_pais_visitante WHERE Partido.id = :id", nativeQuery = true)
+    public int loadScore(@Param("id") Integer id, @Param("goles_pais_local") Integer goles_pais_local, @Param("goles_pais_visitante") Integer goles_pais_visitante);
 }

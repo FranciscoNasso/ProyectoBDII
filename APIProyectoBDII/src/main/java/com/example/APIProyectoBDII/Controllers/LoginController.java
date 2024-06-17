@@ -2,32 +2,24 @@ package com.example.APIProyectoBDII.Controllers;
 
 import com.example.APIProyectoBDII.Controllers.DTO.LoginDTO;
 import com.example.APIProyectoBDII.Controllers.DTO.ParticipanteDTO;
-import com.example.APIProyectoBDII.Controllers.DTO.LoginDTO.LoginDTOBuilder;
 import com.example.APIProyectoBDII.Controllers.DTO.UsuarioDTO;
 import com.example.APIProyectoBDII.Entities.Login;
-import com.example.APIProyectoBDII.Repository.IAdministrador;
 import com.example.APIProyectoBDII.Service.ILoginService;
 import com.example.APIProyectoBDII.Service.IParticipanteService;
 import com.example.APIProyectoBDII.Service.IUsuarioService;
 import com.example.APIProyectoBDII.Service.IAdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
-import org.apache.commons.codec.cli.Digest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import com.example.APIProyectoBDII.Utils.JWTUtil;
-import com.fasterxml.jackson.core.io.JsonStringEncoder;
 
 @RestController
 @RequestMapping("/login")

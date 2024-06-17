@@ -41,11 +41,12 @@ CREATE TABLE Participante(
 );
 
 CREATE TABLE Prediccion(
-    id INT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_partido INT,
     id_participante INT,
     goles_pais_local INT,
     goles_pais_visitante INT,
+    puntos INT DEFAULT 0,
     FOREIGN KEY (id_partido) REFERENCES Partido(id),
     FOREIGN KEY (id_participante) REFERENCES Participante(id)
 );
