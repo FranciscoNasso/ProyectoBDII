@@ -16,11 +16,17 @@ INSERT INTO Carrera(nombre) VALUES
     ('Ingenieria Quimica'),
     ('Diseno Grafico');
 
-INSERT INTO Pais(nombre) VALUES 
-    ('Uruguay'),
-    ('Argentina'),
-    ('Brasil'),
-    ('Chile');
+INSERT INTO Pais(nombre, iso) VALUES 
+    ('Uruguay', 'UY'),
+    ('Argentina', 'AR'),
+    ('Brasil', 'BR'),
+    ('Chile', 'CL'),
+    ('Paraguay', 'PY'),
+    ('Bolivia', 'BO'),
+    ('Peru', 'PE'),
+    ('Ecuador', 'EC'),
+    ('Colombia', 'CO'),
+    ('Venezuela', 'VE');
 
 INSERT INTO Usuario(id, nombre, apellido, email, id_carrera) VALUES
     (54802569, 'Pablo', 'Constantino', 'pablo.constantino@gmail.com', 1),
