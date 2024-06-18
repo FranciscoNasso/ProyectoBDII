@@ -2,7 +2,8 @@ CREATE DATABASE IF NOT EXISTS Campeonato;
 USE Campeonato;
 
 CREATE TABLE Pais(
-    nombre VARCHAR(50) PRIMARY KEY
+    nombre VARCHAR(50) PRIMARY KEY,
+    iso VARCHAR(2) NOT NULL
 );
 
 CREATE TABLE Partido(
