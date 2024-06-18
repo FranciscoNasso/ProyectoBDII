@@ -1,0 +1,16 @@
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>Accione</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pais of paises">
+            <td><img src="{{pais.nombre}}.png" alt=""></td>
+            <td>{{ pais.nombre }}</td>
+
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+<table class="w-full">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Resultado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let partido of partidos">
+            <td>{{ partido.nombre }}</td>
+            <td>{{ partido.fecha }}</td>
+            <td>{{ partido.resultado }}</td>
+        </tr>
+    </tbody>
+</table>

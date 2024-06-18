@@ -9,8 +9,8 @@ import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./main/main.module').then(m => m.MainModule) },
-  { path: 'app', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: '', loadChildren: () => import('./routing/main/main.module').then(m => m.MainModule) },
+  { path: 'app', loadChildren: () => import('./routing/admin/admin.module').then(m => m.AdminModule) },
   { path: '**', redirectTo: '', pathMatch: 'full' }  // Ruta de fallback
 ];
 

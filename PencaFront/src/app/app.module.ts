@@ -14,6 +14,9 @@ import { UserComponent } from './user/user.component';
 import { PosicionesComponent } from './posiciones/posiciones.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { PartidosGestionComponent } from './partidos-gestion/partidos-gestion.component';
+import { CarreraGestionComponent } from './carrera-gestion/carrera-gestion.component';
+import { PaisesGestionComponent } from './paises-gestion/paises-gestion.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     UserComponent,
     PosicionesComponent,
     MainLayoutComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    PartidosGestionComponent,
+    CarreraGestionComponent,
+    PaisesGestionComponent
   ],
   imports: [
     FormsModule,  

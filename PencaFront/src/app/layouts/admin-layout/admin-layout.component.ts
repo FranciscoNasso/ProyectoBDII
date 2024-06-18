@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
 export class AdminLayoutComponent {
   title = 'PencFront';
   navigation = [
-    { name: 'Partidos', href: '#', current: true, icon: 'home' },
-    { name: 'Paises', href: '#', current: false, icon: 'settings' },
-    { name: 'Carreras', href: '#', current: false, icon: 'notifications' },
+    { name: 'Partidos', href: 'app/partidos', current: true, icon: 'home' },
+    { name: 'Paises', href: 'app/paises', current: false, icon: 'settings' },
+    { name: 'Carreras', href: 'app/carreras', current: false, icon: 'notifications' },
   ];
   isMenuOpen = false;
 }
