@@ -17,6 +17,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { PartidosGestionComponent } from './partidos-gestion/partidos-gestion.component';
 import { CarreraGestionComponent } from './carrera-gestion/carrera-gestion.component';
 import { PaisesGestionComponent } from './paises-gestion/paises-gestion.component';
+import { NavComponent } from './layouts/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PaisesGestionComponent } from './paises-gestion/paises-gestion.componen
     AdminLayoutComponent,
     PartidosGestionComponent,
     CarreraGestionComponent,
-    PaisesGestionComponent
+    PaisesGestionComponent,
+    NavComponent
   ],
   imports: [
     FormsModule,  

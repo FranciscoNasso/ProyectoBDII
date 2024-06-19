@@ -14,8 +14,6 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
       { path: 'partidos', component: PartidosComponent },
       { path: 'posiciones', component: PosicionesComponent },
       { path: 'user', component: UserComponent }

@@ -1,3 +1,8 @@
+<a href="/" class="absolute top-0 left-0 mt-4 ml-4">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+  </svg>
+</a>
 <div class="flex justify-center items-center min-h-[600px] mt-4">
     <div class="bg-white shadow-md border rounded-xl px-8 pt-6 pb-8 mb-4">
       <h2 class="text-3xl font-bold mb-6 text-center">Registro</h2>
@@ -89,6 +94,40 @@
         </div>
         <div class="mb-4">
           <div class="relative">
+            <input
+              class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="password"
+              type="password"
+              placeholder="Contraseña"
+              formControlName="password"
+            >
+            <label class="absolute top-0 left-2 -mt-2 text-gray-600 text-xs" for="password">
+              Contraseña
+            </label>
+            <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-red-500 text-xs mt-1">
+              <div *ngIf="registerForm.get('password')?.errors?.['required']">Contraseña es requerida.</div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <div class="relative">
+            <input
+              class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="confirm-password"
+              type="password"
+              placeholder="Confirmar Contraseña"
+              formControlName="confirmPassword"
+            >
+            <label class="absolute top-0 left-2 -mt-2 text-gray-600 text-xs" for="confirm-password">
+              Confirmar Contraseña
+            </label>
+            <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched" class="text-red-500 text-xs mt-1">
+              Las contraseñas no coinciden.
+            </div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <div class="relative">
             <select
               class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="campeon"
@@ -105,7 +144,7 @@
             </div>
           </div>          
         </div>
-        <div class="mb-4">
+        <div class="mb-6">
           <div class="relative">
             <select
               class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -122,40 +161,6 @@
               Sub-campeon es requerido.
             </div>
           </div>          
-        </div>
-        <div class="mb-4">
-          <div class="relative">
-            <input
-              class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="Contraseña"
-              formControlName="password"
-            >
-            <label class="absolute top-0 left-2 -mt-2 text-gray-600 text-xs" for="password">
-              Contraseña
-            </label>
-            <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-red-500 text-xs mt-1">
-              <div *ngIf="registerForm.get('password')?.errors?.['required']">Contraseña es requerida.</div>
-            </div>
-          </div>
-        </div>
-        <div class="mb-6">
-          <div class="relative">
-            <input
-              class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="confirm-password"
-              type="password"
-              placeholder="Confirmar Contraseña"
-              formControlName="confirmPassword"
-            >
-            <label class="absolute top-0 left-2 -mt-2 text-gray-600 text-xs" for="confirm-password">
-              Confirmar Contraseña
-            </label>
-            <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched" class="text-red-500 text-xs mt-1">
-              Las contraseñas no coinciden.
-            </div>
-          </div>
         </div>
         <div class="flex flex-col items-center justify-between">
           <button

@@ -30,6 +30,11 @@ export class UserComponent {
     console.log('User modified');
   }
 
+  logout() {
+    localStorage.removeItem('id_user');
+    localStorage.removeItem('token');
+  }
+
   getUser() {
     const id_user = localStorage.getItem('id_user');
     if (!id_user) {
