@@ -24,4 +24,40 @@ export class PartidoService {
       })
     );
   }
+
+  addGoles(partido: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/partido/load-score/${partido.id}`, partido).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((error) => {
+        console.error('Error loading score', error);
+        return of(null);
+      })
+    );
+  }
+
+  deletePartido(partidoId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/partido/delete/${partidoId}`).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((error) => {
+        console.error('Error deleting partido', error);
+        return of(null);
+      })
+    );
+  }
+
+  createPartido(partido: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/partido/save`, partido).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((error) => {
+        console.error('Error creating partido', error);
+        return of(null);
+      })
+    );
+  }
 }

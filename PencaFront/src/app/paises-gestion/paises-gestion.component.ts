@@ -1,13 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PaisService } from '../Services/pais/pais.service';
+import * as countries from 'i18n-iso-countries';
+
+countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
 @Component({
   selector: 'app-paises-gestion',
   templateUrl: './paises-gestion.component.html',
   styleUrls: ['./paises-gestion.component.css']
 })
-export class PaisesGestionComponent {
+export class PaisesGestionComponent implements OnInit {
   paises: any[] = [];
+  isModalOpen = false;
+  modalTitle = '';
+  modalButtonText = '';
+  currentPais: any = { nombre: '' };
 
   constructor(private paisService: PaisService) { }
   
@@ -19,5 +26,45 @@ export class PaisesGestionComponent {
     this.paisService.getPaises().subscribe((data: any[]) => {
       this.paises = data;
     });
+  }
+
+  getFlagUrl(pais: string): string {
+    const countryCode = countries.getAlpha2Code(pais, 'en');
+    if (!countryCode) {
+      return '';
+    }
+    return `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
+  }
+
+  openAddModal() {
+    this.modalTitle = 'Agregar País';
+    this.modalButtonText = 'Agregar';
+    this.currentPais = { nombre: '' };
+    this.isModalOpen = true;
+  }
+
+  openEditModal(pais: any) {
+    this.modalTitle = 'Editar País';
+    this.modalButtonText = 'Guardar';
+    this.currentPais = { ...pais };
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  onSubmit() {
+    if (this.modalTitle === 'Agregar País') {
+      this.paisService.addPais(this.currentPais).subscribe(() => {
+        this.loadPaises();
+        this.closeModal();
+      });
+    } else {
+      this.paisService.updatePais(this.currentPais).subscribe(() => {
+        this.loadPaises();
+        this.closeModal();
+      });
+    }
   }
 }

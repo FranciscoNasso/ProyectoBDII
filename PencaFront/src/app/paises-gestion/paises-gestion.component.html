@@ -1,16 +1,33 @@
-<table>
-    <thead>
-        <tr>
-            <th></th>
-            <th>Nombre</th>
-            <th>Accione</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let pais of paises">
-            <td><img src="{{pais.nombre}}.png" alt=""></td>
-            <td>{{ pais.nombre }}</td>
+<div class="container mx-auto p-4">
+    <h1 class="font-bold text-3xl mb-8 text-center">Países</h1>
 
-        </tr>
-    </tbody>
-</table>
+    <div class="flex justify-between mb-8">
+      <button (click)="openAddModal()" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Agregar País</button>
+    </div>
+    
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+      <div *ngFor="let pais of paises" class="bg-white shadow-lg rounded-lg p-4 flex flex-col items-center">
+        <img [src]="getFlagUrl(pais.nombre)" alt="{{ pais.nombre }}" class="rounded-lg mb-4 w-20 h-20 object-cover">
+        <p class="text-center font-semibold text-xl">{{ pais.nombre }}</p>
+        <button (click)="openEditModal(pais)" class="mt-4 bg-gray-200 text-gray-700 py-1 px-3 rounded-lg hover:bg-gray-300 transition duration-300">Editar</button>
+      </div>
+    </div>
+    
+    <!-- Modal for Add/Edit -->
+    <div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 animate-fade animate-duration-300">
+      <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-semibold mb-4">{{ modalTitle }}</h2>
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-4">
+            <label class="block text-gray-700">Nombre del País</label>
+            <input [(ngModel)]="currentPais.nombre" name="nombre" type="text" class="mt-1 block w-full p-2 border rounded-lg" required>
+          </div>
+          <div class="flex justify-end">
+            <button type="button" (click)="closeModal()" class="mr-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300">Cancelar</button>
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">{{ modalButtonText }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

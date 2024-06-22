@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PartidoService } from '../Services/partido/partido.service';
 import { PrediccionService } from '../Services/prediccion/prediccion.service';
+import * as countries from 'i18n-iso-countries';
+
 @Component({
   selector: 'app-partidos',
   templateUrl: './partidos.component.html',
@@ -11,7 +13,9 @@ export class PartidosComponent implements OnInit {
   partidos: any[] = [];
   errores: { [key: number]: { local: boolean, visitante: boolean } } = {};
 
-  constructor(private partidoService: PartidoService, private prediccionService: PrediccionService ) { }
+  constructor(private partidoService: PartidoService, private prediccionService: PrediccionService) {
+    countries.registerLocale(require('i18n-iso-countries/langs/es.json'));
+  }
 
   ngOnInit() {
     this.loadPartidos();
@@ -47,12 +51,20 @@ export class PartidosComponent implements OnInit {
     const idUser = localStorage.getItem('id_user');
     this.errores[index].local = !local;
     this.errores[index].visitante = !visitante;
-    
+
     if (idUser !== null) {
       console.log(`Enviando datos: Local - ${local}, Visitante - ${visitante}`);
       this.prediccionService.setPrediccion(partido.id, local, visitante, idUser).subscribe((data) => {
         console.log('Prediccion realizada', data);
       });
     }
+  }
+
+  getFlagUrl(pais: string): string {
+    const countryCode = countries.getAlpha2Code(pais, 'es');
+    if (!countryCode) {
+      return '';
+    }
+    return `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
   }
 }

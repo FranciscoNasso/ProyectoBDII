@@ -24,4 +24,12 @@ export class PaisService {
       })
     );
   }
+
+  addPais(pais: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "/pais/save", pais);
+  }
+
+  updatePais(pais: any): Observable<any> {
+    return this.http.put<any>(this.apiUrl + "/pais/edit", pais);
+  }
 }
