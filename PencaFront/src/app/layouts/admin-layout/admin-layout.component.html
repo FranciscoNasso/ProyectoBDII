@@ -1,5 +1,5 @@
-<button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar"
-    type="button"
+<!-- Botón para abrir/cerrar el sidebar -->
+<button (click)="toggleSidebar()" aria-controls="default-sidebar" type="button"
     class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>
     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -9,14 +9,26 @@
     </svg>
 </button>
 
-<aside id="default-sidebar"
-    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+<!-- Sidebar -->
+<aside id="default-sidebar" [ngClass]="{'-translate-x-full': !isSidebarOpen, 'translate-x-0': isSidebarOpen}"
+    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform sm:translate-x-0"
     aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <!-- Botón para cerrar el sidebar -->
+        <button (click)="toggleSidebar()" aria-controls="default-sidebar" type="button"
+            class="inline-flex items-center p-2 mb-4 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+            <span class="sr-only">Close sidebar</span>
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" fill-rule="evenodd"
+                    d="M10 9.293l4.146-4.147a.5.5 0 01.708.708L10.707 10l4.147 4.146a.5.5 0 01-.708.708L10 10.707l-4.146 4.147a.5.5 0 01-.708-.708L9.293 10 5.146 5.854a.5.5 0 01.708-.708L10 9.293z">
+                </path>
+            </svg>
+        </button>
+        
         <ul class="space-y-2 font-medium">
             <li *ngFor="let item of navigation">
-                <a href={{item.href}}
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hov</a>er:bg-gray-100 dark:hover:bg-gray-700 group">
+                <a href="{{item.href}}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                         <path
@@ -55,7 +67,4 @@
         </ul>
     </div>
 </aside>
-
-<div class="sm:ml-64">
-    <router-outlet></router-outlet>
-</div>
+<app-root></app-root>

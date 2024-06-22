@@ -7,10 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AdminLayoutComponent {
   title = 'PencFront';
+  isSidebarOpen = false;
+
   navigation = [
     { name: 'Partidos', href: 'app/partidos', current: true, icon: 'home' },
     { name: 'Paises', href: 'app/paises', current: false, icon: 'settings' },
     { name: 'Carreras', href: 'app/carreras', current: false, icon: 'notifications' },
   ];
-  isMenuOpen = false;
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
 }

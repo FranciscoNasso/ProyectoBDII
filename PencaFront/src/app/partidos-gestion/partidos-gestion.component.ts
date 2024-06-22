@@ -69,13 +69,7 @@ export class PartidosGestionComponent implements OnInit {
   }
 
   getFlagUrl(pais: string): string {
-    const countryNameCorrections: { [key: string]: string } = {
-      'Brasil': 'Brazil'
-    };
-    
-    const correctedCountryName = countryNameCorrections[pais] || pais;
-
-    const countryCode = countries.getAlpha2Code(correctedCountryName, 'en');
+    const countryCode = countries.getAlpha2Code(pais, 'es');
     if (!countryCode) {
       return '';
     }

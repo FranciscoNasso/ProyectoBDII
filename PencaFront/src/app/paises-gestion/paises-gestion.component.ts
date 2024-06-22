@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PaisService } from '../Services/pais/pais.service';
 import * as countries from 'i18n-iso-countries';
 
-countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
+countries.registerLocale(require('i18n-iso-countries/langs/es.json'));
 
 @Component({
   selector: 'app-paises-gestion',
@@ -29,7 +29,7 @@ export class PaisesGestionComponent implements OnInit {
   }
 
   getFlagUrl(pais: string): string {
-    const countryCode = countries.getAlpha2Code(pais, 'en');
+    const countryCode = countries.getAlpha2Code(pais, 'es');
     if (!countryCode) {
       return '';
     }

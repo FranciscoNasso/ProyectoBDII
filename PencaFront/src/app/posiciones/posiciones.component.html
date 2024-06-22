@@ -6,7 +6,7 @@
         <p class="font-bold text-3xl mb-4">ranking global</p>
         <div class="flex p-5 bg-gray-200 border rounded-2xl w-[390px] font-semibold hover:bg-gray-300 hover:scale-105 duration-300 shadow-sm" 
         *ngFor="let posicion of posiciones; let i = index" 
-            [ngClass]="{'bg-gradient-to-r from-[#82b8ff] to-[#3b90ff] hover:from-[rgb(99,154,255)] hover:to-[#75b1ff]': i + 1 === 2}">
+            [ngClass]="{'bg-gradient-to-r text-white from-[#307cdf] to-[#0852b4] hover:from-[#0852b4] hover:to-[#307cdf]': i + 1 === 2}">
             <p class="mr-4">#{{i + 1}}</p>
             <p>{{posicion.nombre}}</p>
             <p class="ml-auto">{{posicion.puntos}} pts.</p>
