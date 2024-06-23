@@ -18,6 +18,8 @@ import { PartidosGestionComponent } from './partidos-gestion/partidos-gestion.co
 import { CarreraGestionComponent } from './carrera-gestion/carrera-gestion.component';
 import { PaisesGestionComponent } from './paises-gestion/paises-gestion.component';
 import { NavComponent } from './layouts/nav/nav.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,13 @@ import { NavComponent } from './layouts/nav/nav.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
   exports: [
     RouterModule

@@ -10,9 +10,8 @@ export class AdminLayoutComponent {
   isSidebarOpen = false;
 
   navigation = [
-    { name: 'Partidos', href: 'app/partidos', current: true, icon: 'home' },
-    { name: 'Paises', href: 'app/paises', current: false, icon: 'settings' },
-    { name: 'Carreras', href: 'app/carreras', current: false, icon: 'notifications' },
+    { name: 'Partidos', href: 'app/partidos', current: true, icon: 'fa-regular fa-futbol' },
+    { name: 'Paises', href: 'app/paises', current: false, icon: 'fa-solid fa-earth-americas' },
   ];
 
   toggleSidebar() {

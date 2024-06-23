@@ -25,6 +25,18 @@ export class PartidoService {
     );
   }
 
+  postPartido(partido: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "/partido/save", partido).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((error) => {
+        console.error('Error creating partido', error);
+        return of(null);
+      })
+    );
+  }
+
   addGoles(partido: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/partido/load-score/${partido.id}`, partido).pipe(
       map((response) => {

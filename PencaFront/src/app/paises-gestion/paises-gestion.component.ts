@@ -33,7 +33,7 @@ export class PaisesGestionComponent implements OnInit {
     if (!countryCode) {
       return '';
     }
-    return `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
+    return `https://hatscripts.github.io/circle-flags/flags/${countryCode.toLowerCase()}.svg`;
   }
 
   openAddModal() {
