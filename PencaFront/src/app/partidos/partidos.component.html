@@ -29,7 +29,7 @@
                          'bg-white': difHoras(partido.fecha, partido.hora) < 1
                        }"
                        [disabled]="difHoras(partido.fecha, partido.hora) < 1"
-                       [value]="partido.goles_pais_local === null ? '' : partido.goles_pais_local">
+                       [value]="(partido.goles_pais_local === null || partido.goles_pais_local < 0) ? '' : partido.goles_pais_local">
               </div>
               <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
@@ -44,7 +44,7 @@
                          'bg-white': difHoras(partido.fecha, partido.hora) < 1
                        }"
                        [disabled]="difHoras(partido.fecha, partido.hora) < 1"
-                       [value]="partido.goles_pais_visitante === null ? '' : partido.goles_pais_visitante">
+                       [value]="(partido.goles_pais_visitante === null || partido.goles_pais_visitante < 0) ? '' : partido.goles_pais_visitante">
               </div>
               <p class="text-gray-500 text-sm mb-4">{{ partido.estadio }}</p>
               <button *ngIf="difHoras(partido.fecha, partido.hora) >= 1"
