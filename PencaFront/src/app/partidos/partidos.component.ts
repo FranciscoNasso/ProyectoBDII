@@ -65,6 +65,11 @@ export class PartidosComponent implements OnInit {
     if (!countryCode) {
       return '';
     }
-    return `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
+    return `https://hatscripts.github.io/circle-flags/flags/${countryCode.toLowerCase()}.svg`;
+  }
+
+  transformarFecha(fecha: string): string {
+    const [year, month, day] = fecha.split('-');
+    return `${month}/${day}`;
   }
 }
