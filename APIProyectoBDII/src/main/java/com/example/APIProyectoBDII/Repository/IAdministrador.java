@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Repository;
 
+import com.example.APIProyectoBDII.Controllers.DTO.RankingDTO;
 import com.example.APIProyectoBDII.Entities.Administrador;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
@@ -36,5 +37,13 @@ public interface IAdministrador extends CrudRepository<Administrador, Long>{
     @Modifying
     @Query(value = "INSERT INTO Administrador (id) VALUES (:id)", nativeQuery = true)
     public void crearAdministrador(@Param("id") int id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO Ranking SELECT Pa.id AS id_participante, COALESCE(SUM(P.puntos), 0) + CASE WHEN Pa.campeon = ?1 THEN 10 ELSE 0 END + CASE WHEN Pa.subcampeon = ?2 THEN 5 ELSE 0 END AS puntaje_final FROM Prediccion P JOIN Usuario U ON P.id_participante = U.id RIGHT JOIN Participante Pa ON P.id_participante = Pa.id GROUP BY Pa.id", nativeQuery = true)
+    public int finalizar(String campeon, String subcampeon);
+
+    @Query(value = "SELECT U.id AS id_participante, U.nombre AS nombre, U.apellido AS apellido, R.puntaje_final AS puntos FROM Ranking R LEFT JOIN Usuario U ON R.id_participante = U.id ORDER BY R.puntaje_final DESC", nativeQuery = true)
+    public List<RankingDTO> getRanking();
 
 }

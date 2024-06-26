@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Persistence;
 
+import com.example.APIProyectoBDII.Controllers.DTO.RankingDTO;
 import com.example.APIProyectoBDII.Entities.Administrador;
 
 import java.util.List;
@@ -16,5 +17,9 @@ public interface IAdministradorDAO {
     void delete(int id);
     
     int checkExistence(Integer id);
+
+    public int finalizar(String campeon, String subcampeon);
+
+    public List<RankingDTO> getRanking();
 
 }

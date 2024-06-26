@@ -44,8 +44,8 @@ public class PartidoController {
                     .id(partido.getId())
                     .fecha(partido.getFecha())
                     .hora(partido.getHora())
-                    .paisLocal(partido.getIdPaislocal().getNombre())
-                    .paisVisitante(partido.getIdPaisvisitante().getNombre())
+                    .id_pais_local(partido.getId_pais_local().getNombre())
+                    .id_pais_visitante(partido.getId_pais_visitante().getNombre())
                     .goles_pais_local(partido.getGoles_pais_local())
                     .goles_pais_visitante(partido.getGoles_pais_visitante())
                     .build();
@@ -63,8 +63,8 @@ public class PartidoController {
                     .id(partido.getId())
                     .fecha(partido.getFecha())
                     .hora(partido.getHora())
-                    .paisLocal(partido.getIdPaislocal().getNombre())
-                    .paisVisitante(partido.getIdPaisvisitante().getNombre())
+                    .id_pais_local(partido.getId_pais_local().getNombre())
+                    .id_pais_visitante(partido.getId_pais_visitante().getNombre())
                     .goles_pais_local(partido.getGoles_pais_local())
                     .goles_pais_visitante(partido.getGoles_pais_visitante())
                     .build();
@@ -75,20 +75,20 @@ public class PartidoController {
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody PartidoDTO partidoDTO) throws URISyntaxException {
-        if (partidoDTO.getFecha() == null || partidoDTO.getHora() == null || partidoDTO.getPaisLocal() == null
-                || partidoDTO.getPaisVisitante() == null) {
+        if (partidoDTO.getFecha() == null || partidoDTO.getHora() == null || partidoDTO.getId_pais_local() == null
+                || partidoDTO.getId_pais_visitante() == null) {
             return ResponseEntity.badRequest().body("El partido necesita fecha, hora, pais local y pais visitante");
         }
-        if (paisService.findById(partidoDTO.getPaisLocal()).isPresent()
-                && paisService.findById(partidoDTO.getPaisVisitante()).isPresent()) {
+        if (paisService.findById(partidoDTO.getId_pais_local()).isPresent()
+                && paisService.findById(partidoDTO.getId_pais_visitante()).isPresent()) {
             if (partidoDTO.getGoles_pais_local() == null) {
                 partidoDTO.setGoles_pais_local(-1);
             }
             if (partidoDTO.getGoles_pais_visitante() == null) {
                 partidoDTO.setGoles_pais_visitante(-1);
             }
-            partidoService.savePartido(partidoDTO.getFecha(), partidoDTO.getHora(), partidoDTO.getPaisLocal(),
-                    partidoDTO.getPaisVisitante(), partidoDTO.getGoles_pais_local(),
+            partidoService.savePartido(partidoDTO.getFecha(), partidoDTO.getHora(), partidoDTO.getId_pais_local(),
+                    partidoDTO.getId_pais_visitante(), partidoDTO.getGoles_pais_local(),
                     partidoDTO.getGoles_pais_visitante());
             return ResponseEntity.created(new URI("/partido/save")).build();
         }

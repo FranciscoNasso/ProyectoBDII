@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Service.Impl;
 
+import com.example.APIProyectoBDII.Controllers.DTO.RankingDTO;
 import com.example.APIProyectoBDII.Entities.Administrador;
 
 import com.example.APIProyectoBDII.Persistence.IAdministradorDAO;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class AdministradorService implements IAdministradorService {
@@ -39,5 +39,15 @@ public class AdministradorService implements IAdministradorService {
 
     public int checkExistence(Integer id) {
         return administradorDAO.checkExistence(id);
+    }
+
+    @Override
+    public int finalizar(String campeon, String subcampeon) {
+        return administradorDAO.finalizar(campeon, subcampeon);
+    }
+
+    @Override
+    public List<RankingDTO> getRanking() {
+        return administradorDAO.getRanking();
     }
 }

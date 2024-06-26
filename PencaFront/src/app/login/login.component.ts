@@ -45,7 +45,7 @@ export class LoginComponent {
             }
           });
           // alert('Bienvenido!');
-          this.router.navigate(['partidos']);
+          this.router.navigate(['/posiciones']);
       },
       error: (error) => {
           console.error('Login failed', error);

@@ -1,12 +1,14 @@
 package com.example.APIProyectoBDII.Controllers;
 
 import com.example.APIProyectoBDII.Controllers.DTO.AdministradorDTO;
+import com.example.APIProyectoBDII.Controllers.DTO.RankingDTO;
 import com.example.APIProyectoBDII.Controllers.DTO.UsuarioDTO;
 import com.example.APIProyectoBDII.Entities.Administrador;
 import com.example.APIProyectoBDII.Entities.Usuario;
 import com.example.APIProyectoBDII.Service.IAdministradorService;
 import com.example.APIProyectoBDII.Service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -94,5 +97,20 @@ public class AdministradorController {
         return ResponseEntity.badRequest().body("Debe Ingresar un Id valido");
     }
 
+    @PostMapping("/finalizar")
+    public ResponseEntity<?> finalizar(@RequestBody Map<String, String> body){
+        String campeon = body.get("campeon");
+        String subcampeon = body.get("subcampeon");
+        int result = administradorService.finalizar(campeon, subcampeon);
+        if(result == 0){
+            return ResponseEntity.badRequest().body("Error al finalizar penca");
+        }
+        return ResponseEntity.ok(result + "Rows affected");
+    }
 
+    @GetMapping("/getRankingFinal")
+    public ResponseEntity<List<RankingDTO>> getRanking() {
+        List<RankingDTO> ranking = administradorService.getRanking();
+        return new ResponseEntity<>(ranking, HttpStatus.OK);
+    }
 }

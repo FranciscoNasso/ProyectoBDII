@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Persistence.Impl;
 
+import com.example.APIProyectoBDII.Controllers.DTO.RankingDTO;
 import com.example.APIProyectoBDII.Entities.Administrador;
 import com.example.APIProyectoBDII.Entities.Usuario;
 import com.example.APIProyectoBDII.Persistence.IAdministradorDAO;
@@ -39,5 +40,15 @@ public class AdministradorDAOImpl implements IAdministradorDAO {
     @Override
     public int checkExistence(Integer ci) {
         return administradorRepository.checkExistence(ci);
+    }
+
+    @Override
+    public int finalizar(String campeon, String subcampeon) {
+        return administradorRepository.finalizar(campeon, subcampeon);
+    }
+
+    @Override
+    public List<RankingDTO> getRanking() {
+        return administradorRepository.getRanking();
     }
 }
