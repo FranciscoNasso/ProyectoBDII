@@ -21,7 +21,7 @@ export class PartidosGestionComponent implements OnInit {
     goles_pais_local: null,
     goles_pais_visitante: null
   };
-  mostrarFormulario: boolean = true;
+  mostrarFormulario: boolean = false;
 
   constructor(private partidoService: PartidoService, private paisService: PaisService, private toastr: ToastrService) {
     countries.registerLocale(require('i18n-iso-countries/langs/es.json'));

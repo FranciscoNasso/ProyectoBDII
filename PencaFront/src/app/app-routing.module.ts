@@ -6,6 +6,11 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PosicionesComponent } from './posiciones/posiciones.component';
 import { UserComponent } from './user/user.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { PartidosGestionComponent } from './partidos-gestion/partidos-gestion.component';
+import { CarreraGestionComponent } from './carrera-gestion/carrera-gestion.component';
+import { PaisesGestionComponent } from './paises-gestion/paises-gestion.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AdminGuard } from './auth/admin.guard';
 import { ValidGuard } from './auth/valid.guard';
@@ -16,9 +21,25 @@ import { ValidGuard } from './auth/valid.guard';
 // ValidGuard permite entrada a user y admin mientras tengan un token valido
 // Si no tienen un token valido, o no tienen acceso a esa pagina se los redirige a /login (a checkear)
 const routes: Routes = [
-  { 
+  {
     path: '',
-    component: LoginComponent
+    component: MainLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent, },
+      { path: 'partidos', canActivate: [AuthGuard], component: PartidosComponent, },
+      { path: 'posiciones', canActivate: [ValidGuard], component: PosicionesComponent, },
+      { path: 'user', canActivate: [AuthGuard], component: UserComponent, }
+    ]
+  },
+  {
+    path: 'app',
+    canActivate: [AdminGuard],
+    component: AdminLayoutComponent,
+    children: [
+      { path: 'partidos', component: PartidosGestionComponent },
+      { path: "carreras", component: CarreraGestionComponent },
+      { path: "paises", component: PaisesGestionComponent },
+    ]
   },
   {
     path: 'login',
@@ -28,22 +49,7 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent
   },
-  {
-    path: 'user',
-    canActivate: [AuthGuard], //esta mal, era un ejemplo
-    component: UserComponent
-  },
-  {
-    path: 'posiciones',
-    canActivate: [ValidGuard],
-    component: PosicionesComponent
-  },
-  {
-    path: 'partidos',
-    canActivate: [ValidGuard],
-    component: PartidosComponent
-  },
-  { path: '**', redirectTo: '', pathMatch: 'full' }  // Ruta de fallback
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
