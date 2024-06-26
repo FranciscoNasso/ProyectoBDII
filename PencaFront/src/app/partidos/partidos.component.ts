@@ -34,12 +34,24 @@ export class PartidosComponent implements OnInit {
   }
 
   loadPartidos() {
-    this.partidoService.getPartidos().subscribe((data: any[]) => {
-      this.partidos = data;
-      this.partidos.forEach((_, index) => {
-        this.errores[index] = { local: false, visitante: false };
+    const idUser = localStorage.getItem('id_user');
+    if (idUser !== null) {
+      this.partidoService.getPartidosByUser(idUser).subscribe((data: any[]) => {
+        console.log('Partidos', data);
+        this.partidos = data;
+        this.partidos.forEach((_, index) => {
+          this.errores[index] = { local: false, visitante: false };
+        });
       });
-    });
+    } else {
+      this.partidoService.getPartidos().subscribe((data: any[]) => {
+        console.log('Partidos', data);
+        this.partidos = data;
+        this.partidos.forEach((_, index) => {
+          this.errores[index] = { local: false, visitante: false };
+        });
+      });
+    }
   }
 
   predecir(index: number) {
@@ -71,5 +83,19 @@ export class PartidosComponent implements OnInit {
   transformarFecha(fecha: string): string {
     const [year, month, day] = fecha.split('-');
     return `${month}/${day}`;
+  }
+
+  calcularPuntaje(partido: any): string {
+    if (partido.goles_pais_local === null || partido.goles_pais_visitante === null) {
+      return '';
+    }
+    let puntaje = 0;
+    if (partido.prediccion_pais_local !== null) {
+      puntaje += partido.goles_pais_local === partido.prediccion_pais_local ? 2 : 0;
+    }
+    if (partido.prediccion_pais_visitante !== null) {
+      puntaje += partido.goles_pais_visitante === partido.prediccion_pais_visitante ? 2 : 0;
+    }
+    return `+${puntaje} pts`;
   }
 }

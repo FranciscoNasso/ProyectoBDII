@@ -18,7 +18,19 @@ export class PartidoService {
   }
 
   getPartidos(): Observable<any> {
-    return this.http.get<any>(this.apiUrl + "/partido/findAll/54802572").pipe(
+    return this.http.get<any>(this.apiUrl + "/partido/findall").pipe(
+      map((response) => { // Explicitly specify the type of 'response'
+        return response;
+      }),
+      catchError((error) => {
+        console.error('Error loading carreras', error);
+        return of(null); // Retornar un observable con un valor nulo para continuar el flujo
+      })
+    );
+  }
+
+  getPartidosByUser(id_user: string): Observable<any> {
+    return this.http.get<any>(this.apiUrl + "/partido/findAll/"+ id_user).pipe(
       map((response) => { // Explicitly specify the type of 'response'
         return response;
       }),

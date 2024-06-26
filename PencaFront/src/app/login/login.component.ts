@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { GlobalService } from 'src/global.service';
 import { LoginService } from '../Services/login/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../Services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
   registerForm: FormGroup;
 
-  constructor(private loginService: LoginService, private globalService: GlobalService, private router: Router, private fb: FormBuilder) {
+  constructor(private loginService: LoginService, private globalService: GlobalService, private router: Router, private fb: FormBuilder, private authService: AuthService) {
     this.registerForm = this.fb.group({
       ci: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -30,6 +31,19 @@ export class LoginComponent {
           this.router.navigate(['/user']);
           localStorage.setItem('token', response.token);
           localStorage.setItem('id_user', ci);
+
+          this.authService.isAdmin().subscribe({
+            next: (response:any) => {
+              if (response) {
+                this.router.navigate(['/app/partidos']);
+              } else {
+                this.router.navigate(['/user']);
+              }
+            },
+            error: (error:any) => {
+              console.error('isAdmin failed', error);
+            }
+          });
           // alert('Bienvenido!');
           this.router.navigate(['partidos']);
       },

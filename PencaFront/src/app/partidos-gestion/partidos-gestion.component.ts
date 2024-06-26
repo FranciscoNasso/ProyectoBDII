@@ -34,6 +34,7 @@ export class PartidosGestionComponent implements OnInit {
   
   loadPartidos() {
     this.partidoService.getPartidos().subscribe((data: any[]) => {
+      console.log('Partidos', data);
       this.partidos = data;
     });
   }

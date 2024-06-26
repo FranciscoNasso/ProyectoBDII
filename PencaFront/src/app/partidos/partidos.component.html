@@ -1,26 +1,28 @@
-<!-- app.component.html -->
 <div class="bg-title pt-[100px] flex flex-col items-center justify-end pb-8">
-    <h1 class="font-bold text-5xl text-white mb-4">Partidos</h1>
-  </div>
-  <div class="flex justify-center text-center pt-4 px-4">
-    <div>
-      <div class="container p-4 flex justify-center">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <ng-container *ngFor="let partido of partidos; let i = index;">
-            <div class="border text-center rounded-3xl shadow-lg h-max bg-white p-4 max-w-md w-full">
-              <div class="flex justify-between items-center mb-4 mr-32">
-                <p *ngIf="difHoras(partido.fecha, partido.hora) >= 0; else finalizadoTemplate" class="text-gray-500">
-                    {{this.transformarFecha(partido.fecha)}} a las {{ partido.hora.substring(0, partido.hora.lastIndexOf(":")) }}
-                </p>
-                <ng-template #finalizadoTemplate>
+  <h1 class="font-bold text-5xl text-white mb-4">Partidos</h1>
+</div>
+<div class="flex justify-center text-center pt-4 px-4">
+  <div>
+    <div class="container p-4 flex justify-center">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <ng-container *ngFor="let partido of partidos; let i = index;">
+          <div class="border text-center rounded-3xl shadow-lg h-max bg-white p-4 max-w-md w-full">
+            <div class="flex justify-between items-center mb-4">
+              <p *ngIf="difHoras(partido.fecha, partido.hora) >= 0; else finalizadoTemplate" class="text-gray-500">
+                {{ transformarFecha(partido.fecha) }} a las {{ partido.hora.substring(0, partido.hora.lastIndexOf(":")) }}
+              </p>
+              <ng-template #finalizadoTemplate>
+                <div class="flex justify-between items-center w-full">
                   <p class="text-gray-400">Finalizado</p>
-                </ng-template>
+                  <p [ngClass]="{'text-green-600': calcularPuntaje(partido) !== '+0 pts', 'text-gray-400': calcularPuntaje(partido) === '+0 pts'}">{{ calcularPuntaje(partido) }}</p>                </div>
+              </ng-template>
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center">
+                <img [src]="getFlagUrl(partido.id_pais_local)" alt="{{ partido.id_pais_local }}" class="w-10 h-10 rounded-full mr-1">
+                <p class="ml-2 text-gray-700 font-semibold">{{ partido.id_pais_local }}</p>
               </div>
-              <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center">
-                  <img [src]="getFlagUrl(partido.id_pais_local)" alt="{{ partido.id_pais_local }}" class="w-10 h-10 rounded-full mr-1">
-                  <p class="ml-2 text-gray-700 font-semibold">{{ partido.id_pais_local }}</p>
-                </div>
+              <div class="flex items-center justify-center" *ngIf="difHoras(partido.fecha, partido.hora) >= 0; else finalizadoLocalTemplate">
                 <input id="local-{{ i }}"
                        class="text-lg font-semibold w-10 h-10 text-center rounded-lg"
                        type="number"
@@ -29,13 +31,27 @@
                          'bg-white': difHoras(partido.fecha, partido.hora) < 1
                        }"
                        [disabled]="difHoras(partido.fecha, partido.hora) < 1"
-                       [value]="(partido.goles_pais_local === null || partido.goles_pais_local < 0) ? '' : partido.goles_pais_local">
+                       [value]="partido.prediccion_pais_local || ''">
               </div>
-              <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center">
-                  <img [src]="getFlagUrl(partido.id_pais_visitante)" alt="{{ partido.id_pais_visitante }}" class="w-10 h-10 rounded-full mr-1">
-                  <p class="ml-2 text-gray-700 font-semibold">{{ partido.id_pais_visitante }}</p>
+              <ng-template #finalizadoLocalTemplate>
+                <div class="flex items-center justify-center text-center w-20">
+                  <p class="text-lg font-semibold w-10 h-10 text-center flex items-center justify-center rounded-lg"
+                     [ngClass]="{
+                       'bg-green-500': partido.prediccion_pais_local !== null && partido.goles_pais_local === partido.prediccion_pais_local,
+                       'bg-red-200': partido.prediccion_pais_local !== null && partido.goles_pais_local !== partido.prediccion_pais_local
+                     }">
+                    {{ partido.goles_pais_local }}
+                  </p>
+                  <span *ngIf="partido.prediccion_pais_local !== null" class="text-sm text-gray-500 ml-1">({{ partido.prediccion_pais_local }})</span>
                 </div>
+              </ng-template>
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center">
+                <img [src]="getFlagUrl(partido.id_pais_visitante)" alt="{{ partido.id_pais_visitante }}" class="w-10 h-10 rounded-full mr-1">
+                <p class="ml-2 text-gray-700 font-semibold">{{ partido.id_pais_visitante }}</p>
+              </div>
+              <div class="flex items-center justify-center" *ngIf="difHoras(partido.fecha, partido.hora) >= 0; else finalizadoVisitanteTemplate">
                 <input id="visitante-{{ i }}"
                        class="text-lg font-semibold w-10 h-10 text-center rounded-lg"
                        type="number"
@@ -44,18 +60,30 @@
                          'bg-white': difHoras(partido.fecha, partido.hora) < 1
                        }"
                        [disabled]="difHoras(partido.fecha, partido.hora) < 1"
-                       [value]="(partido.goles_pais_visitante === null || partido.goles_pais_visitante < 0) ? '' : partido.goles_pais_visitante">
+                       [value]="partido.prediccion_pais_visitante || ''">
               </div>
-              <p class="text-gray-500 text-sm mb-4">{{ partido.estadio }}</p>
-              <button *ngIf="difHoras(partido.fecha, partido.hora) >= 1"
-                      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-3xl w-full"
-                      (click)="predecir(i)">
-                Predecir
-              </button>
+              <ng-template #finalizadoVisitanteTemplate>
+                <div class="flex items-center justify-center text-center w-20">
+                  <p class="text-lg font-semibold w-10 h-10 flex items-center justify-center text-center rounded-lg"
+                     [ngClass]="{
+                       'bg-green-500': partido.prediccion_pais_visitante !== null && partido.goles_pais_visitante === partido.prediccion_pais_visitante,
+                       'bg-red-200': partido.prediccion_pais_visitante !== null && partido.goles_pais_visitante !== partido.prediccion_pais_visitante
+                     }">
+                    {{ partido.goles_pais_visitante }}
+                  </p>
+                  <span *ngIf="partido.prediccion_pais_visitante !== null" class="text-sm text-gray-700 ml-1">({{ partido.prediccion_pais_visitante }})</span>
+                </div>
+              </ng-template>
             </div>
-          </ng-container>
-        </div>
+            <p class="text-gray-500 text-sm mb-4">{{ partido.estadio }}</p>
+            <button *ngIf="difHoras(partido.fecha, partido.hora) >= 1"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-3xl w-full"
+                    (click)="predecir(i)">
+              Predecir
+            </button>
+          </div>
+        </ng-container>
       </div>
     </div>
   </div>
-  
+</div>
