@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Repository;
 
+import com.example.APIProyectoBDII.Controllers.DTO.PartidoPrediccionDTO;
 import com.example.APIProyectoBDII.Entities.Partido;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
@@ -36,4 +37,7 @@ public interface IPartido extends CrudRepository<Partido, Long> {
     @Modifying
     @Query(value = "UPDATE Partido SET goles_pais_local = :goles_pais_local, goles_pais_visitante = :goles_pais_visitante WHERE Partido.id = :id", nativeQuery = true)
     public int loadScore(@Param("id") Integer id, @Param("goles_pais_local") Integer goles_pais_local, @Param("goles_pais_visitante") Integer goles_pais_visitante);
+
+    @Query(value = "SELECT Partido.id as id, Partido.fecha as fecha, Partido.hora as hora, Partido.id_pais_local as id_pais_local, Partido.id_pais_visitante as id_pais_visitante, Partido.goles_pais_local as goles_pais_local, Partido.goles_pais_visitante as goles_pais_visitante, Prediccion.goles_pais_local as prediccion_pais_local, Prediccion.goles_pais_visitante as prediccion_pais_visitante FROM Partido LEFT JOIN Prediccion ON Partido.id = Prediccion.id_partido AND Prediccion.id_participante = ?1", nativeQuery = true)
+    public List<PartidoPrediccionDTO> findAllPartidosById(Integer id);
 }

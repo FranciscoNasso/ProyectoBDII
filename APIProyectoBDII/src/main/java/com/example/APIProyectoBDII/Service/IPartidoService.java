@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Service;
 
+import com.example.APIProyectoBDII.Controllers.DTO.PartidoPrediccionDTO;
 import com.example.APIProyectoBDII.Entities.Partido;
 
 import java.time.LocalDate;
@@ -18,4 +19,6 @@ public interface IPartidoService {
     public void deletePartido(Integer id);
 
     public int loadScore(Integer id, Integer goles_pais_local, Integer goles_pais_visitante);
+
+    public List<PartidoPrediccionDTO> findAllPartidosById(Integer id);
 }

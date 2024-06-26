@@ -30,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], //esta mal, era un ejemplo
     component: UserComponent
   },
   {

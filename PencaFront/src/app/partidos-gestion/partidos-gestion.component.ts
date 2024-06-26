@@ -16,8 +16,8 @@ export class PartidosGestionComponent implements OnInit {
     nombre: '',
     fecha: '',
     hora: '',
-    paisLocal: '',
-    paisVisitante: '',
+    id_pais_local: '',
+    id_pais_visitante: '',
     goles_pais_local: null,
     goles_pais_visitante: null
   };
@@ -78,8 +78,8 @@ export class PartidosGestionComponent implements OnInit {
           nombre: '',
           fecha: '',
           hora: '',
-          paisLocal: '',
-          paisVisitante: '',
+          id_pais_local: '',
+          id_pais_visitante: '',
           goles_pais_local: null,
           goles_pais_visitante: null
         };
