@@ -93,7 +93,7 @@
               [disabled]="puedeModificar(partido.fecha, partido.hora)" [ngClass]="{
                      'bg-gray-200': puedeModificar(partido.fecha, partido.hora),
                      'bg-white': !puedeModificar(partido.fecha, partido.hora)
-                   }" *ngIf="partido.goles_pais_local >= 0">
+                   }">
           </div>
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center">
@@ -106,7 +106,7 @@
               [disabled]="puedeModificar(partido.fecha, partido.hora)" [ngClass]="{
                      'bg-gray-200': puedeModificar(partido.fecha, partido.hora),
                      'bg-white': !puedeModificar(partido.fecha, partido.hora)
-                   }" *ngIf="partido.goles_pais_visitante >= 0">
+                   }">
           </div>
           <div class="flex justify-center w-full gap-x-2 mt-4">
             <button *ngIf="!puedeModificar(partido.fecha, partido.hora)"

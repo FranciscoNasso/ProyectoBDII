@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../Services/user/user.service';
+import { PrediccionService } from '../Services/prediccion/prediccion.service';
 
 @Component({
   selector: 'app-user',
@@ -7,16 +8,10 @@ import { UserService } from '../Services/user/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
-  user = {
-    nombre: 'John Doe',
-    email: 'erik@gmail.com',
-    apellido : 'Doe',
-    cedula: '1234567890',
-    posicion: '1',
-  }
+  user : any = { };
   modify: boolean = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private prediccionService: PrediccionService) { }
   toggleModify() {
     this.modify = !this.modify;
     console.log('Modify: ', this.modify);
@@ -45,7 +40,6 @@ export class UserComponent {
       this.user.nombre = data.nombre;
       this.user.apellido = data.apellido;
       this.user.email = data.email;
-      this.user.posicion = data.posicion;
     });
   }
 }

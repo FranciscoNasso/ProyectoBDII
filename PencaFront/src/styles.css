@@ -4,8 +4,16 @@
 
 .bg-title {
   background-image:url("assets/hero-bg.png");
-  min-height: 30vh;
+  height: 250px;
   margin-top: -80px;
+}
+
+.bg-title2 {
+  background-image: url("assets/hero-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .bg-design {

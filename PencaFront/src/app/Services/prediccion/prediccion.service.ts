@@ -37,4 +37,18 @@ export class PrediccionService {
       })
     );
   }
+
+  getPuntaje(id_participante: string): Observable<any> {
+    return this.http.get<any>(this.apiUrl + "/prediccion/getPuntaje/" + id_participante)
+    .pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      }),
+      catchError(error => {
+        console.error(error);
+        throw new Error('Invalid credentialsservicets');
+      })
+    );
+  }
 }
