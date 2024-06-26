@@ -1,7 +1,7 @@
 package com.example.APIProyectoBDII.Service;
 
+import com.example.APIProyectoBDII.Controllers.DTO.RankingDTO;
 import com.example.APIProyectoBDII.Entities.Administrador;
-import com.example.APIProyectoBDII.Entities.Usuario;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,4 +19,6 @@ public interface IAdministradorService {
     int checkExistence(Integer id);
 
     public int finalizar(String campeon, String subcampeon);
+
+    public List<RankingDTO> getRanking();
 }
