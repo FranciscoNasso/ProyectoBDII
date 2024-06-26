@@ -21,9 +21,9 @@ public class PartidoDTO {
 
     private LocalTime hora;
     // seguramente tenga que ser cambiado a snake_case
-    private String paisLocal;
+    private String id_pais_local;
 
-    private String paisVisitante;
+    private String id_pais_visitante;
 
     private Integer goles_pais_local;
 
