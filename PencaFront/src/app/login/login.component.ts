@@ -31,7 +31,7 @@ export class LoginComponent {
           localStorage.setItem('token', response.token);
           localStorage.setItem('id_user', ci);
           // alert('Bienvenido!');
-          this.router.navigate(['partidos']);
+          this.router.navigate(['/posiciones']);
       },
       error: (error) => {
           console.error('Login failed', error);

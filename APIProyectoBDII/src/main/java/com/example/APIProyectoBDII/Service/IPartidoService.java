@@ -14,7 +14,7 @@ public interface IPartidoService {
 
     public Optional<Partido> getPartido(Integer id);
 
-    public void savePartido(LocalDate fecha, LocalTime hora, String paisLocal, String paisVisitante, Integer goles_pais_local, Integer goles_pais_visitante);
+    public void savePartido(LocalDate fecha, LocalTime hora, String id_pais_local, String id_pais_visitante, Integer goles_pais_local, Integer goles_pais_visitante);
 
     public void deletePartido(Integer id);
 

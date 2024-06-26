@@ -25,11 +25,11 @@ public class Partido {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pais_local")
-    private Pais idPaislocal;
+    private Pais id_pais_local;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pais_visitante")
-    private Pais idPaisvisitante;
+    private Pais id_pais_visitante;
 
     @Column(name = "goles_pais_local")
     private Integer goles_pais_local;
