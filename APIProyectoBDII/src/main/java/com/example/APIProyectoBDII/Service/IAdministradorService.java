@@ -17,4 +17,6 @@ public interface IAdministradorService {
     public void delete(int id);
 
     int checkExistence(Integer id);
+
+    public int finalizar(String campeon, String subcampeon);
 }

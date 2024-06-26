@@ -37,4 +37,9 @@ public interface IAdministrador extends CrudRepository<Administrador, Long>{
     @Query(value = "INSERT INTO Administrador (id) VALUES (:id)", nativeQuery = true)
     public void crearAdministrador(@Param("id") int id);
 
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO Ranking SELECT Pa.id AS id_participante, COALESCE(SUM(P.puntos), 0) + CASE WHEN Pa.campeon = ?1 THEN 10 ELSE 0 END + CASE WHEN Pa.subcampeon = ?2 THEN 5 ELSE 0 END AS puntaje_final FROM Prediccion P JOIN Usuario U ON P.id_participante = U.id RIGHT JOIN Participante Pa ON P.id_participante = Pa.id GROUP BY Pa.id", nativeQuery = true)
+    public int finalizar(String campeon, String subcampeon);
+
 }

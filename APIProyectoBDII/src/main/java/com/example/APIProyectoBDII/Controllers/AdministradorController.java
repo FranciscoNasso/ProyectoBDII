@@ -14,6 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -94,5 +95,14 @@ public class AdministradorController {
         return ResponseEntity.badRequest().body("Debe Ingresar un Id valido");
     }
 
-
+    @PostMapping("/finalizar")
+    public ResponseEntity<?> finalizar(@RequestBody Map<String, String> body){
+        String campeon = body.get("campeon");
+        String subcampeon = body.get("subcampeon");
+        int result = administradorService.finalizar(campeon, subcampeon);
+        if(result == 0){
+            return ResponseEntity.badRequest().body("Error al finalizar penca");
+        }
+        return ResponseEntity.ok(result + "Rows affected");
+    }
 }

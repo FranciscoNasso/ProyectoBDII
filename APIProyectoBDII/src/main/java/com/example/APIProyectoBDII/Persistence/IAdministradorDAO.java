@@ -17,4 +17,6 @@ public interface IAdministradorDAO {
     
     int checkExistence(Integer id);
 
+    public int finalizar(String campeon, String subcampeon);
+
 }

@@ -40,4 +40,9 @@ public class AdministradorService implements IAdministradorService {
     public int checkExistence(Integer id) {
         return administradorDAO.checkExistence(id);
     }
+
+    @Override
+    public int finalizar(String campeon, String subcampeon) {
+        return administradorDAO.finalizar(campeon, subcampeon);
+    }
 }

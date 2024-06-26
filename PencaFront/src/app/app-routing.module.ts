@@ -20,8 +20,8 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 // Si no tienen un token valido, o no tienen acceso a esa pagina se los redirige a /login (a checkear)
 const routes: Routes = [
   { 
-    path: '',
-    component: LoginComponent
+    path: '', 
+    component: HomeComponent 
   },
   {
     path: 'login',
