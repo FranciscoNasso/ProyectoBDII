@@ -7,10 +7,19 @@ import { Component } from '@angular/core';
 })
 export class AdminLayoutComponent {
   title = 'PencFront';
+  isSidebarOpen = false;
+
   navigation = [
-    { name: 'Partidos', href: '#', current: true, icon: 'home' },
-    { name: 'Paises', href: '#', current: false, icon: 'settings' },
-    { name: 'Carreras', href: '#', current: false, icon: 'notifications' },
+    { name: 'Partidos', href: 'app/partidos', current: true, icon: 'fa-regular fa-futbol' },
+    { name: 'Paises', href: 'app/paises', current: false, icon: 'fa-solid fa-earth-americas' },
   ];
-  isMenuOpen = false;
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  logout() {
+    localStorage.removeItem('id_user');
+    localStorage.removeItem('token');
+  }
 }

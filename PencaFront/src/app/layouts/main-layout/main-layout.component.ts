@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { NavComponent } from '../nav/nav.component';
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
@@ -7,11 +7,4 @@ import { Component } from '@angular/core';
 })
 export class MainLayoutComponent {
   title = 'PencFront';
-  navigation = [
-    { name: 'Partidos', href: '#', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
-  ];
-  isMenuOpen = false;
 }

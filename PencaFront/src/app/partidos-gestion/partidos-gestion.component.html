@@ -1,0 +1,126 @@
+<div class="bg-title pt-[20px] flex flex-col items-center justify-end pb-8">
+  <h1 class="font-bold text-5xl text-white mb-4">Gestión de Partidos</h1>
+</div>
+
+<div class="flex justify-center text-center pt-4 px-4">
+  <div class="container p-4 flex flex-col items-center">
+    <!-- Botón para mostrar el formulario -->
+    <button (click)="toggleForm()"
+      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full flex items-center mb-4">
+      <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+      </svg>
+      Agregar Partido
+    </button>
+
+    <!-- Formulario para agregar nuevo partido -->
+    <div *ngIf="mostrarFormulario" class="w-full max-w-lg mb-8 ">
+      <form (ngSubmit)="agregarPartido()"
+        class="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 mb-4 text-start space-y-4">
+        <h2 class="font-bold text-2xl mb-6">Agregar Nuevo Partido</h2>
+        <div class="grid md:grid-cols-2 gap-x-2">
+          <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="fecha">
+              Fecha
+            </label>
+            <input [(ngModel)]="nuevoPartido.fecha" name="fecha" type="date" placeholder="Fecha"
+              class="shadow appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required>
+          </div>
+          <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="hora">
+              Hora
+            </label>
+            <input [(ngModel)]="nuevoPartido.hora" name="hora" type="time" placeholder="Hora"
+              class="shadow appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-x-2">
+          <div class="">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="paisLocal">
+              País Local
+            </label>
+            <select [(ngModel)]="nuevoPartido.paisLocal" name="paisLocal"
+              class="shadow appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required>
+              <option value="" disabled selected>Selecciona un pais</option>
+              <option *ngFor="let pais of paises" [value]="pais.nombre" class="py-2 px-4">{{ pais.nombre }}</option>
+            </select>
+          </div>
+          <div class="">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="paisVisitante">
+              País Visitante
+            </label>
+            <select [(ngModel)]="nuevoPartido.paisVisitante" name="paisLocal"
+              class="shadow appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required>
+              <option value="" disabled selected>Selecciona un pais</option>
+              <option *ngFor="let pais of paises" [value]="pais.nombre" class="py-2 px-4">{{ pais.nombre }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-xl">
+            Agregar Partido
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Lista de partidos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+      <ng-container *ngFor="let partido of partidos; let i = index;">
+        <div class="border text-center rounded-3xl shadow-lg h-max bg-white p-4 max-w-md w-full">
+          <div class="flex justify-between items-center mb-4 mr-32">
+            <p class="text-gray-500">
+              {{transformarFecha(partido.fecha)}} a las {{ partido.hora.substring(0, partido.hora.lastIndexOf(":")) }}
+            </p>
+            <ng-template #finalizadoTemplate>
+              <p class="text-gray-400">Finalizado</p>
+            </ng-template>
+          </div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center">
+              <img [src]="getFlagUrl(partido.paisLocal)" alt="{{ partido.paisLocal }}"
+                class="w-10 h-10 rounded-full mr-1">
+              <p class="ml-2 text-gray-700 font-semibold">{{ partido.paisLocal }}</p>
+            </div>
+            <input id="local-{{ i }}" class="text-lg font-semibold w-10 h-10 text-center rounded-lg border"
+              type="number" [(ngModel)]="partido.goles_pais_local"
+              [disabled]="puedeModificar(partido.fecha, partido.hora)" [ngClass]="{
+                     'bg-gray-200': puedeModificar(partido.fecha, partido.hora),
+                     'bg-white': !puedeModificar(partido.fecha, partido.hora)
+                   }">
+          </div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center">
+              <img [src]="getFlagUrl(partido.paisVisitante)" alt="{{ partido.paisVisitante }}"
+                class="w-10 h-10 rounded-full mr-1">
+              <p class="ml-2 text-gray-700 font-semibold">{{ partido.paisVisitante }}</p>
+            </div>
+            <input id="visitante-{{ i }}" class="text-lg font-semibold w-10 h-10 text-center rounded-lg border"
+              type="number" [(ngModel)]="partido.goles_pais_visitante"
+              [disabled]="puedeModificar(partido.fecha, partido.hora)" [ngClass]="{
+                     'bg-gray-200': puedeModificar(partido.fecha, partido.hora),
+                     'bg-white': !puedeModificar(partido.fecha, partido.hora)
+                   }">
+          </div>
+          <div class="flex justify-center w-full gap-x-2 mt-4">
+            <button *ngIf="!puedeModificar(partido.fecha, partido.hora)"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-3xl"
+              (click)="guardarGoles(partido)">
+              Guardar
+            </button>
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-3xl"
+              (click)="eliminarPartido(partido.id)">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

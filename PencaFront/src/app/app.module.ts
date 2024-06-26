@@ -14,6 +14,12 @@ import { UserComponent } from './user/user.component';
 import { PosicionesComponent } from './posiciones/posiciones.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { PartidosGestionComponent } from './partidos-gestion/partidos-gestion.component';
+import { CarreraGestionComponent } from './carrera-gestion/carrera-gestion.component';
+import { PaisesGestionComponent } from './paises-gestion/paises-gestion.component';
+import { NavComponent } from './layouts/nav/nav.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,7 +31,11 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     UserComponent,
     PosicionesComponent,
     MainLayoutComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    PartidosGestionComponent,
+    CarreraGestionComponent,
+    PaisesGestionComponent,
+    NavComponent
   ],
   imports: [
     FormsModule,  
@@ -39,7 +49,13 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
   exports: [
     RouterModule

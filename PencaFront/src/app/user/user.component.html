@@ -1,45 +1,53 @@
-<div class="flex flex-col items-center justify-center h-screen">
-    <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
-        <div *ngIf="this.modify">
-            <div class="mb-4">
-                <label class="text-gray-600">Nombre:</label>
-                <input type="text" class="text-gray-900" [(ngModel)]="user.nombre">
-            </div>
-            <div class="mb-4">
-                <label class="text-gray-600">Apellido:</label>
-                <input type="text" class="text-gray-900" [(ngModel)]="user.apellido">
-            </div>
-            <div class="mb-4">
-                <label class="text-gray-600">Email:</label>
-                <input type="email" class="text-gray-900" [(ngModel)]="user.email">
-            </div>
-            <div class="mb-4">
-                <label class="text-gray-600">Posición en la tabla:</label>
-                <input type="number" class="text-gray-900" [(ngModel)]="user.posicion">
-            </div>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="toggleModify()">Cancelar</button>
-            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Modificar</button>
-        </div>
-
-        <div #userDetails *ngIf="!this.modify">
-            <div class="mb-4">
-                <label class="text-gray-600">Nombre:</label>
-                <p class="text-gray-900">{{ user.nombre }}</p>
-            </div>
-            <div class="mb-4">
-                <label class="text-gray-600">Apellido:</label>
-                <p class="text-gray-900">{{ user.apellido }}</p>
-            </div>
-            <div class="mb-4">
-                <label class="text-gray-600">Email:</label>
-                <p class="text-gray-900">{{ user.email }}</p>
-            </div>
-            <div class="mb-4">
-                <label class="text-gray-600">Posición en la tabla:</label>
-                <p class="text-gray-900">{{ user.posicion}}</p>
-            </div>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                (click)="toggleModify()">Modificar</button>
-        </div>
-    </div>
+<div class="bg-title pt-[100px] flex flex-col items-center justify-end pb-8">
+    <p class="font-bold text-5xl text-white mb-4">Usuario</p>
 </div>
+<div class="flex flex-col items-center justify-center pt-10">
+    <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+      <div class="absolute top-6 right-4">
+        <a href="#" class="text-red-500 hover:text-red-700" (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
+      </div>
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Perfil del Usuario</h2>
+      <div *ngIf="modify">
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium mb-2">Nombre:</label>
+          <input type="text"
+                 class="block w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                 [(ngModel)]="user.nombre">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium mb-2">Apellido:</label>
+          <input type="text"
+                 class="block w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                 [(ngModel)]="user.apellido">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium mb-2">Email:</label>
+          <input type="email"
+                 class="block w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                 [(ngModel)]="user.email">
+        </div>
+        <div class="flex justify-between">
+          <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="toggleModify()">Cancelar</button>
+          <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" (click)="modifyUser()">Guardar</button>
+        </div>
+      </div>
+      <div *ngIf="!modify">
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium mb-2">Nombre:</label>
+          <p class="block w-full px-4 py-2 border rounded-lg bg-gray-100 text-gray-700">{{ user.nombre }}</p>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium mb-2">Apellido:</label>
+          <p class="block w-full px-4 py-2 border rounded-lg bg-gray-100 text-gray-700">{{ user.apellido }}</p>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium mb-2">Email:</label>
+          <p class="block w-full px-4 py-2 border rounded-lg bg-gray-100 text-gray-700">{{ user.email }}</p>
+        </div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" (click)="toggleModify()">Modificar</button>
+      </div>
+    </div>
+  </div>
+  

@@ -12,11 +12,7 @@ import { AdminGuard } from './auth/admin.guard';
 
 // falta agregar rutas para usuarios y para admins
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
+  { path: '', loadChildren: () => import('./routing/main/main.module').then(m => m.MainModule) },
   {
     path: 'login',
     component: LoginComponent
@@ -40,6 +36,8 @@ const routes: Routes = [
     canActivate: [AdminGuard],
     component: PartidosComponent
   },
+  { path: 'app', loadChildren: () => import('./routing/admin/admin.module').then(m => m.AdminModule) },
+  { path: '**', redirectTo: '', pathMatch: 'full' }  // Ruta de fallback
 ];
 
 @NgModule({
