@@ -30,7 +30,8 @@ export class LoginComponent {
           this.router.navigate(['/user']);
           localStorage.setItem('token', response.token);
           localStorage.setItem('id_user', ci);
-          alert('Bienvenido!');
+          // alert('Bienvenido!');
+          this.router.navigate(['partidos']);
       },
       error: (error) => {
           console.error('Login failed', error);

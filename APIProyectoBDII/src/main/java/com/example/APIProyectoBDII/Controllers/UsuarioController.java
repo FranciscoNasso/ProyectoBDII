@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.APIProyectoBDII.Utils.JWTUtil;
+
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -72,6 +74,12 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body("Usuario no existe");
         }
        return ResponseEntity.badRequest().body("se requiere un id");
+    }
+
+    @PostMapping("/validarToken")
+    public ResponseEntity<String> validarToken(@RequestBody String token) {
+        String result = JWTUtil.validarToken(token);
+        return ResponseEntity.ok(result);
     }
 
 }
