@@ -60,3 +60,8 @@ INSERT INTO Partido(fecha, hora, id_pais_local, id_pais_visitante) VALUES
     ('2024-06-17', '20:45:00', 'Chile', 'Brasil'),
     ('2024-06-18', '13:00:00', 'Argentina', 'Chile');
 
+INSERT INTO Prediccion(id_partido, id_participante, goles_pais_local, goles_pais_visitante) VALUES
+(1, 54802572, 3, 2),
+(2, 54802572, 1, 2),
+(1, 54802573, 0, 0),
+(2, 54802573, 0, 1);
