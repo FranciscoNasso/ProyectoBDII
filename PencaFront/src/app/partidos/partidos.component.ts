@@ -43,7 +43,7 @@ export class PartidosComponent implements OnInit {
   }
 
   predecir(index: number) {
-    const partido = this.partidos[index];
+    const partido = this.partidos[index]; 
     const localInput = document.getElementById(`local-${index}`) as HTMLInputElement;
     const visitanteInput = document.getElementById(`visitante-${index}`) as HTMLInputElement;
     const local = localInput.value;

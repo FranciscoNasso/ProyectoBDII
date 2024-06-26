@@ -9,6 +9,9 @@ import { UserComponent } from './user/user.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AdminGuard } from './auth/admin.guard';
 import { ValidGuard } from './auth/valid.guard';
+import { PartidosGestionComponent } from './partidos-gestion/partidos-gestion.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 
 // AuthGuard solo permite entrada a los que son users (no admin)
@@ -42,6 +45,21 @@ const routes: Routes = [
     path: 'partidos',
     canActivate: [ValidGuard],
     component: PartidosComponent
+  },
+  {
+    path: 'partidos-gestion',
+    canActivate: [AdminGuard],
+    component: PartidosGestionComponent
+  },
+  {
+    path: 'layouts/admin-layout',
+    canActivate: [AdminGuard],
+    component: AdminLayoutComponent
+  },
+  {
+    path: 'layouts/main-layout',
+    canActivate: [AuthGuard],
+    component: MainLayoutComponent
   },
   { path: '**', redirectTo: '', pathMatch: 'full' }  // Ruta de fallback
 ];
