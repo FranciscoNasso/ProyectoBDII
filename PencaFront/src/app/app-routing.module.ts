@@ -6,12 +6,40 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PosicionesComponent } from './posiciones/posiciones.component';
 import { UserComponent } from './user/user.component';
+import { AuthGuard } from './auth/auth.guard';
+import { AdminGuard } from './auth/admin.guard';
 
 
+// falta agregar rutas para usuarios y para admins
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./main/main.module').then(m => m.MainModule) },
-  { path: 'app', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
-  { path: '**', redirectTo: '', pathMatch: 'full' }  // Ruta de fallback
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'user',
+    canActivate: [AuthGuard],
+    component: UserComponent
+  },
+  {
+    path: 'posiciones',
+    canActivate: [AuthGuard],
+    component: PosicionesComponent
+  },
+  {
+    path: 'partidos',
+    canActivate: [AdminGuard],
+    component: PartidosComponent
+  },
 ];
 
 @NgModule({
