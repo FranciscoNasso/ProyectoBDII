@@ -7,16 +7,19 @@ import { LoginComponent } from '../../login/login.component';
 import { RegisterComponent } from '../../register/register.component';
 import { PosicionesComponent } from '../../posiciones/posiciones.component';
 import { UserComponent } from '../../user/user.component';
+import { AuthGuard } from '../../auth/auth.guard';
+import { AdminGuard } from '../../auth/admin.guard';
+import { ValidGuard } from '../../auth/valid.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: HomeComponent },
-      { path: 'partidos', component: PartidosComponent },
-      { path: 'posiciones', component: PosicionesComponent },
-      { path: 'user', component: UserComponent }
+      { path: '', component: HomeComponent, },
+      { path: 'partidos', component: PartidosComponent,  },
+      { path: 'posiciones', component: PosicionesComponent, },
+      { path: 'user', component: UserComponent, }
     ]
   }
 ];
