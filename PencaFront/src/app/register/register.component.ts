@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
     this.registerService.register(documento, nombre, apellido, email, carrera, password, campeon, subCamepon).subscribe({
       next: (response) => {
         console.log('Register successful', response);
-        // this.router.navigate(['/home']);
+        this.router.navigate(['/partidos']);
       },
       error: (error) => {
         console.error('Register failed', error);

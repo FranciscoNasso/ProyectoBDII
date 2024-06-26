@@ -62,3 +62,9 @@ CREATE TABLE Carrera(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(150)
 )
+
+CREATE TABLE Ranking(
+    id_participante INT PRIMARY KEY,
+    puntaje_final INT,
+    FOREIGN KEY (id_participante) REFERENCES Participante(id)
+)

@@ -40,4 +40,9 @@ public class AdministradorDAOImpl implements IAdministradorDAO {
     public int checkExistence(Integer ci) {
         return administradorRepository.checkExistence(ci);
     }
+
+    @Override
+    public int finalizar(String campeon, String subcampeon) {
+        return administradorRepository.finalizar(campeon, subcampeon);
+    }
 }
