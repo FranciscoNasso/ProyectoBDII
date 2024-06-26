@@ -8,11 +8,18 @@ import { PosicionesComponent } from './posiciones/posiciones.component';
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AdminGuard } from './auth/admin.guard';
+import { ValidGuard } from './auth/valid.guard';
 
 
-// falta agregar rutas para usuarios y para admins
+// AuthGuard solo permite entrada a los que son users (no admin)
+// AdminGuard solo permite entrada a los que son admin
+// ValidGuard permite entrada a user y admin mientras tengan un token valido
+// Si no tienen un token valido, o no tienen acceso a esa pagina se los redirige a /login (a checkear)
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./routing/main/main.module').then(m => m.MainModule) },
+  { 
+    path: '',
+    component: LoginComponent
+  },
   {
     path: 'login',
     component: LoginComponent
@@ -28,15 +35,14 @@ const routes: Routes = [
   },
   {
     path: 'posiciones',
-    canActivate: [AuthGuard],
+    canActivate: [ValidGuard],
     component: PosicionesComponent
   },
   {
     path: 'partidos',
-    canActivate: [AdminGuard],
+    canActivate: [ValidGuard],
     component: PartidosComponent
   },
-  { path: 'app', loadChildren: () => import('./routing/admin/admin.module').then(m => m.AdminModule) },
   { path: '**', redirectTo: '', pathMatch: 'full' }  // Ruta de fallback
 ];
 
