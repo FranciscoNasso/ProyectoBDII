@@ -1,15 +1,18 @@
 package com.example.APIProyectoBDII.Controllers;
 
 import com.example.APIProyectoBDII.Controllers.DTO.PrediccionDTO;
+import com.example.APIProyectoBDII.Controllers.DTO.RankingDTO;
 import com.example.APIProyectoBDII.Service.IPrediccionService;
 
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/prediccion")
@@ -45,7 +48,8 @@ public class PrediccionController {
     }
 
     @GetMapping("/getRanking")
-    public ResponseEntity<?> getRanking() {
-        return ResponseEntity.ok(prediccionService.getRanking());
+    public ResponseEntity<List<RankingDTO>> getRanking() {
+        List<RankingDTO> ranking = prediccionService.getRanking();
+        return new ResponseEntity<>(ranking, HttpStatus.OK);
     }
 }

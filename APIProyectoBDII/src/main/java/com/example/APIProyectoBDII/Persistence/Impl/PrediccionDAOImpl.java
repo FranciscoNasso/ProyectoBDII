@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Persistence.Impl;
 
+import com.example.APIProyectoBDII.Controllers.DTO.RankingDTO;
 import com.example.APIProyectoBDII.Entities.Prediccion;
 import com.example.APIProyectoBDII.Persistence.IPrediccionDAO;
 import com.example.APIProyectoBDII.Repository.IPrediccion;
@@ -33,7 +34,7 @@ public class PrediccionDAOImpl implements IPrediccionDAO {
     }
 
     @Override
-    public Map<Integer, Integer> getRanking(){
+    public List<RankingDTO> getRanking(){
         return prediccionRepository.getRanking();
     }
 }
