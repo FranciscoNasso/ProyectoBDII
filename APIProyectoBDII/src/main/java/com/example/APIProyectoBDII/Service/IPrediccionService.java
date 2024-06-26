@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Service;
 
+import com.example.APIProyectoBDII.Controllers.DTO.RankingDTO;
 import com.example.APIProyectoBDII.Entities.Prediccion;
 
 import java.util.List;
@@ -14,5 +15,5 @@ public interface IPrediccionService {
 
     public int getPuntaje(Integer id_participante);
 
-    public Map<Integer, Integer> getRanking();
+    public List<RankingDTO> getRanking();
 }

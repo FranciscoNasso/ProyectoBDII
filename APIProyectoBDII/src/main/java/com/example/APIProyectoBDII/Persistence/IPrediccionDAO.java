@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Persistence;
 
+import com.example.APIProyectoBDII.Controllers.DTO.RankingDTO;
 import com.example.APIProyectoBDII.Entities.Pais;
 
 import java.util.List;
@@ -14,5 +15,5 @@ public interface IPrediccionDAO {
 
     public int getPuntaje(Integer id_participante);
 
-    public Map<Integer, Integer> getRanking();
+    public List<RankingDTO> getRanking();
 }
