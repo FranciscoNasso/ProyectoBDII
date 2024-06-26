@@ -17,4 +17,9 @@ export class AdminLayoutComponent {
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
+
+  logout() {
+    localStorage.removeItem('id_user');
+    localStorage.removeItem('token');
+  }
 }

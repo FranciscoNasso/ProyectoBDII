@@ -67,4 +67,12 @@ export class PaisesGestionComponent implements OnInit {
       });
     }
   }
+
+  deletePais(nombre: string) {
+    if (confirm('¿Estás seguro de que deseas eliminar este país?')) {
+      this.paisService.deletePais(nombre).subscribe(() => {
+        this.loadPaises();
+      });
+    }
+  }
 }

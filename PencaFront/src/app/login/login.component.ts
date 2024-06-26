@@ -26,8 +26,8 @@ export class LoginComponent {
 
     this.loginService.login(ci, password).subscribe({
       next: (response) => {
-          console.log('Login successful', response.token);
-          // this.router.navigate(['/home']);
+          console.log('Login successful', response);
+          this.router.navigate(['/user']);
           localStorage.setItem('token', response.token);
           localStorage.setItem('id_user', ci);
           alert('Bienvenido!');
