@@ -80,9 +80,9 @@
                                 </div>
                                 <div class="flex items-center justify-between mb-4">
                                     <div class="flex items-center">
-                                        <img [src]="getFlagUrl(partido.paisLocal)" alt="{{ partido.paisLocal }}"
+                                        <img [src]="getFlagUrl(partido.id_pais_local)" alt="{{ partido.id_pais_local }}"
                                             class="w-10 h-10 rounded-full mr-1">
-                                        <p class="ml-2 text-gray-700 font-semibold">{{ partido.paisLocal }}</p>
+                                        <p class="ml-2 text-gray-700 font-semibold">{{ partido.id_pais_local }}</p>
                                     </div>
                                     <p class="text-lg font-semibold w-10 h-10 text-center rounded-lg">
                                         {{ partido.goles_pais_local === null || partido.goles_pais_visitante === -1 ?
@@ -91,9 +91,9 @@
                                 </div>
                                 <div class="flex items-center justify-between mb-4">
                                     <div class="flex items-center">
-                                        <img [src]="getFlagUrl(partido.paisVisitante)" alt="{{ partido.paisVisitante }}"
+                                        <img [src]="getFlagUrl(partido.id_pais_visitante)" alt="{{ partido.id_pais_visitante }}"
                                             class="w-10 h-10 rounded-full mr-1">
-                                        <p class="ml-2 text-gray-700 font-semibold">{{ partido.paisVisitante }}</p>
+                                        <p class="ml-2 text-gray-700 font-semibold">{{ partido.id_pais_visitante }}</p>
                                     </div>
                                     <p class="text-lg font-semibold w-10 h-10 text-center rounded-lg">
                                         {{ partido.goles_pais_visitante === null || partido.goles_pais_visitante === -1

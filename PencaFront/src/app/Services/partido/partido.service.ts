@@ -13,8 +13,12 @@ export class PartidoService {
 
   constructor(private http: HttpClient, private globalService: GlobalService) { }
 
+  getId(): number | null {
+    return parseInt(localStorage.getItem('id_user')!);
+  }
+
   getPartidos(): Observable<any> {
-    return this.http.get<any>(this.apiUrl + "/partido/findall").pipe(
+    return this.http.get<any>(this.apiUrl + "/partido/findAll/54802572").pipe(
       map((response) => { // Explicitly specify the type of 'response'
         return response;
       }),

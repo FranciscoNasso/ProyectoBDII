@@ -8,6 +8,7 @@ import com.example.APIProyectoBDII.Service.IPrediccionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.APIProyectoBDII.Controllers.DTO.PartidoPrediccionDTO;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -27,6 +28,12 @@ public class PartidoController {
 
     @Autowired
     private IPaisService paisService;
+
+    @GetMapping("/findAll/{id}")
+    public ResponseEntity<List<PartidoPrediccionDTO>> findAllPartidosById(@PathVariable Integer id) {
+        List<PartidoPrediccionDTO> partidoList = partidoService.findAllPartidosById(id);
+        return ResponseEntity.ok(partidoList);
+    }
 
     @GetMapping("/findall")
     public ResponseEntity<?> findAllPartidos() {

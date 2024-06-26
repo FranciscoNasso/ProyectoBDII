@@ -18,8 +18,8 @@
               </div>
               <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
-                  <img [src]="getFlagUrl(partido.paisLocal)" alt="{{ partido.paisLocal }}" class="w-10 h-10 rounded-full mr-1">
-                  <p class="ml-2 text-gray-700 font-semibold">{{ partido.paisLocal }}</p>
+                  <img [src]="getFlagUrl(partido.id_pais_local)" alt="{{ partido.id_pais_local }}" class="w-10 h-10 rounded-full mr-1">
+                  <p class="ml-2 text-gray-700 font-semibold">{{ partido.id_pais_local }}</p>
                 </div>
                 <input id="local-{{ i }}"
                        class="text-lg font-semibold w-10 h-10 text-center rounded-lg"
@@ -33,8 +33,8 @@
               </div>
               <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
-                  <img [src]="getFlagUrl(partido.paisVisitante)" alt="{{ partido.paisVisitante }}" class="w-10 h-10 rounded-full mr-1">
-                  <p class="ml-2 text-gray-700 font-semibold">{{ partido.paisVisitante }}</p>
+                  <img [src]="getFlagUrl(partido.id_pais_visitante)" alt="{{ partido.id_pais_visitante }}" class="w-10 h-10 rounded-full mr-1">
+                  <p class="ml-2 text-gray-700 font-semibold">{{ partido.id_pais_visitante }}</p>
                 </div>
                 <input id="visitante-{{ i }}"
                        class="text-lg font-semibold w-10 h-10 text-center rounded-lg"

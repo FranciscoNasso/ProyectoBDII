@@ -1,5 +1,6 @@
 package com.example.APIProyectoBDII.Service.Impl;
 
+import com.example.APIProyectoBDII.Controllers.DTO.PartidoPrediccionDTO;
 import com.example.APIProyectoBDII.Entities.Partido;
 import com.example.APIProyectoBDII.Persistence.IPartidoDAO;
 import com.example.APIProyectoBDII.Service.IPartidoService;
@@ -40,5 +41,10 @@ public class PartidoService implements IPartidoService {
     @Override
     public int loadScore(Integer id, Integer goles_pais_local, Integer goles_pais_visitante) {
         return partidoDAO.loadScore(id, goles_pais_local, goles_pais_visitante);
+    }
+
+    @Override
+    public List<PartidoPrediccionDTO> findAllPartidosById(Integer id) {
+        return partidoDAO.findAllPartidosById(id);
     }
 }
