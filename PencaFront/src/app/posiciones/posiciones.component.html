@@ -8,7 +8,7 @@
         *ngFor="let posicion of posiciones; let i = index" 
             [ngClass]="{'bg-gradient-to-r text-white from-[#307cdf] to-[#0852b4] hover:from-[#0852b4] hover:to-[#307cdf]': i + 1 === 2}">
             <p class="mr-4">#{{i + 1}}</p>
-            <p>{{posicion.nombre}}</p>
+            <p>{{posicion.nombre}} {{posicion.apellido}}</p>
             <p class="ml-auto">{{posicion.puntos}} pts.</p>
         </div>
     </div>
