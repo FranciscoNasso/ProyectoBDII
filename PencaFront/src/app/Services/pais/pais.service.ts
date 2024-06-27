@@ -32,7 +32,7 @@ export class PaisService {
 
     const body = JSON.stringify({
       nombre: pais.nombre,
-      iso: pais.nombre,
+      iso: "UY",
     });
 
     return this.http.post<any>(this.apiUrl + "/pais/save", body, { headers: headers });

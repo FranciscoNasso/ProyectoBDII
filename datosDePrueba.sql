@@ -23,7 +23,7 @@ INSERT INTO Pais(nombre, iso) VALUES
     ('Chile', 'CL'),
     ('Paraguay', 'PY'),
     ('Bolivia', 'BO'),
-    ('Peru', 'PE'),
+    ('Perú', 'PE'),
     ('Ecuador', 'EC'),
     ('Colombia', 'CO'),
     ('Venezuela', 'VE');
