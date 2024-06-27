@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient  } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GlobalService } from '../../../global.service';
 import { catchError, map } from 'rxjs/operators';
@@ -26,7 +26,16 @@ export class PaisService {
   }
 
   addPais(pais: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl + "/pais/save", pais);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    const body = JSON.stringify({
+      nombre: pais.nombre,
+      iso: pais.nombre,
+    });
+
+    return this.http.post<any>(this.apiUrl + "/pais/save", body, { headers: headers });
   }
 
   updatePais(pais: any): Observable<any> {

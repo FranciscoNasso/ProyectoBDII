@@ -1,0 +1,36 @@
+<div class="bg-title pt-[100px] flex flex-col items-center justify-end pb-8">
+    <h1 class="font-bold text-3xl md:text-5xl text-center text-white mb-4">Gestion de competición</h1>
+</div>
+<div class="flex justify-center text-center pt-4 px-4">
+    <div>
+        <form [formGroup]="finalizarForm" (ngSubmit)="finalizar()"
+            class="p-4 flex flex-col items-center bg-white rounded-3xl shadow-lg w-[250px] max-w-md text-start">
+            <div class="mb-4 w-full">
+                <label for="campeon" class="block text-gray-700 text-sm font-bold mb-2">Campeón:</label>
+                <select id="campeon" formControlName="campeon"
+                    class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option *ngFor="let pais of paises" [value]="pais.nombre">{{ pais.nombre }}</option>
+                </select>
+                <div *ngIf="finalizarForm.get('campeon')?.invalid && finalizarForm.get('campeon')?.touched"
+                    class="text-red-500 text-xs mt-1 text-start">
+                    Seleccionar un campeón es obligatorio.
+                </div>
+            </div>
+            <div class="mb-4 w-full">
+                <label for="subCampeon" class="block text-gray-700 text-sm font-bold mb-2">Subcampeón:</label>
+                <select id="subCampeon" formControlName="subCampeon"
+                    class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option *ngFor="let pais of paises" [value]="pais.nombre">{{ pais.nombre }}</option>
+                </select>
+                <div *ngIf="finalizarForm.get('subCampeon')?.invalid && finalizarForm.get('subCampeon')?.touched"
+                    class="text-red-500 text-xs mt-1 text-start">
+                    Seleccionar un subcampeón es obligatorio.
+                </div>
+            </div>
+            <button type="submit" [disabled]="finalizarForm.invalid"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-3xl w-full">
+                Finalizar
+            </button>
+        </form>
+    </div>
+</div>

@@ -8,9 +8,9 @@ import { PosicionesComponent } from './posiciones/posiciones.component';
 import { UserComponent } from './user/user.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { PartidosGestionComponent } from './partidos-gestion/partidos-gestion.component';
-import { CarreraGestionComponent } from './carrera-gestion/carrera-gestion.component';
 import { PaisesGestionComponent } from './paises-gestion/paises-gestion.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { CompeticionComponent } from './competicion/competicion.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AdminGuard } from './auth/admin.guard';
 import { ValidGuard } from './auth/valid.guard';
@@ -36,8 +36,9 @@ const routes: Routes = [
     canActivate: [AdminGuard],
     component: AdminLayoutComponent,
     children: [
+      { path: '', redirectTo: 'competicion', pathMatch: 'full'},
+      { path: 'competicion', component: CompeticionComponent},
       { path: 'partidos', component: PartidosGestionComponent },
-      { path: "carreras", component: CarreraGestionComponent },
       { path: "paises", component: PaisesGestionComponent },
     ]
   },

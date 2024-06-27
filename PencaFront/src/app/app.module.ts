@@ -15,11 +15,11 @@ import { PosicionesComponent } from './posiciones/posiciones.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { PartidosGestionComponent } from './partidos-gestion/partidos-gestion.component';
-import { CarreraGestionComponent } from './carrera-gestion/carrera-gestion.component';
 import { PaisesGestionComponent } from './paises-gestion/paises-gestion.component';
 import { NavComponent } from './layouts/nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { CompeticionComponent } from './competicion/competicion.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +33,9 @@ import { ToastrModule } from 'ngx-toastr';
     MainLayoutComponent,
     AdminLayoutComponent,
     PartidosGestionComponent,
-    CarreraGestionComponent,
     PaisesGestionComponent,
-    NavComponent
+    NavComponent,
+    CompeticionComponent
   ],
   imports: [
     FormsModule,  

@@ -10,10 +10,6 @@
       <div *ngFor="let pais of paises" class="bg-white shadow-lg rounded-lg p-4 flex flex-col items-center hover:scale-105 duration-300">
         <img [src]="getFlagUrl(pais.nombre)" alt="{{ pais.nombre }}" class="rounded-lg mb-4 w-20 h-20 object-cover">
         <p class="text-center font-semibold text-xl">{{ pais.nombre }}</p>
-        <div class="flex space-x-2 mt-4">
-          <button (click)="openEditModal(pais)" class="bg-gray-200 text-gray-700 py-1 px-3 rounded-lg hover:bg-gray-300 transition duration-300">Editar</button>
-          <button (click)="deletePais(pais.nombre)" class="bg-red-500 text-white py-1 px-3 rounded-lg hover:bg-red-700 transition duration-300">Eliminar</button>
-        </div>
       </div>
     </div>
     

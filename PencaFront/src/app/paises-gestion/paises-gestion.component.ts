@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PaisService } from '../Services/pais/pais.service';
 import * as countries from 'i18n-iso-countries';
+import { ToastrService } from 'ngx-toastr';
 
 countries.registerLocale(require('i18n-iso-countries/langs/es.json'));
 
@@ -16,12 +17,12 @@ export class PaisesGestionComponent implements OnInit {
   modalButtonText = '';
   currentPais: any = { nombre: '' };
 
-  constructor(private paisService: PaisService) { }
-  
+  constructor(private paisService: PaisService, private toast: ToastrService) { }
+
   ngOnInit() {
     this.loadPaises();
   }
-  
+
   loadPaises() {
     this.paisService.getPaises().subscribe((data: any[]) => {
       this.paises = data;
@@ -55,16 +56,22 @@ export class PaisesGestionComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.modalTitle === 'Agregar País') {
-      this.paisService.addPais(this.currentPais).subscribe(() => {
-        this.loadPaises();
-        this.closeModal();
-      });
-    } else {
-      this.paisService.updatePais(this.currentPais).subscribe(() => {
-        this.loadPaises();
-        this.closeModal();
-      });
+    try {
+      if (this.modalTitle === 'Agregar País') {
+        this.paisService.addPais(this.currentPais).subscribe(() => {
+          this.loadPaises();
+          this.closeModal();
+          this.toast.success('País agregado correctamente', 'País agregado');
+        });
+      } else {
+        this.paisService.updatePais(this.currentPais).subscribe(() => {
+          this.loadPaises();
+          this.closeModal();
+          this.toast.success('País agregado correctamente', 'País agregado');
+        });
+      }
+    } catch (error) {
+      this.toast.error('Ecurrio un error', 'Error');
     }
   }
 

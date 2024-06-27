@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PosicionesService } from '../Services/posiciones/posiciones.service';
 
 @Component({
@@ -6,28 +6,39 @@ import { PosicionesService } from '../Services/posiciones/posiciones.service';
   templateUrl: './posiciones.component.html',
   styleUrls: ['./posiciones.component.css']
 })
-export class PosicionesComponent {
-
-  /* posiciones: { nombre: string, puntos: number }[] = [
-    { nombre: 'Facundo Hernandez', puntos: 10 },
-    { nombre: 'Equipo 2', puntos: 8 },
-    { nombre: 'Equipo 3', puntos: 6 },
-    { nombre: 'Equipo 4', puntos: 4 },
-    { nombre: 'Equipo 5', puntos: 2 }
-  ]; */
-
+export class PosicionesComponent implements OnInit {
   posiciones: { id_participante: number, puntos: number, nombre: string, apellido: string }[] = [];
-
-  constructor(private posicionesService: PosicionesService) { }
   id_usuario: string = "";
 
+  constructor(private posicionesService: PosicionesService) { }
+
   ngOnInit() {
-    this.posicionesService.getRanking().subscribe(data => {
-      this.posiciones = data;
+    this.posicionesService.getRankingFinal().subscribe(data => {
+      if (data.length > 0) {
+        this.posiciones = data.sort((a: any, b: any) => b.puntos - a.puntos);
+      } else {
+        this.posicionesService.getRanking().subscribe(data => {
+          this.posiciones = data.sort((a: any, b: any) => b.puntos - a.puntos);
+        });
+      }
     });
-    const dataStorage = localStorage.getItem('id_usuario');
+    const dataStorage = localStorage.getItem('id_user');
     if (dataStorage) {
       this.id_usuario = dataStorage;
+    }
+  }
+
+  getBackgroundClass(index: number, id_participante: number): string {
+    if (index === 0) {
+      return 'bg-gradient-to-r from-yellow-400 to-yellow-600 text-white';
+    } else if (index === 1) {
+      return 'bg-gradient-to-r from-gray-400 to-gray-600 text-white';
+    } else if (index === 2) {
+      return 'bg-gradient-to-r from-yellow-800 to-yellow-900 text-white';
+    } else if (id_participante.toString() === this.id_usuario) {
+      return 'bg-gradient-to-r from-[#307cdf] to-[#0852b4] text-white hover:from-[#0852b4] hover:to-[#307cdf]';
+    } else {
+      return 'bg-gray-200 hover:bg-gray-300';
     }
   }
 }

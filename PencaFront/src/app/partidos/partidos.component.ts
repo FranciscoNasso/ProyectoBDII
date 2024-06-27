@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PartidoService } from '../Services/partido/partido.service';
 import { PrediccionService } from '../Services/prediccion/prediccion.service';
 import * as countries from 'i18n-iso-countries';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-partidos',
@@ -13,7 +14,7 @@ export class PartidosComponent implements OnInit {
   partidos: any[] = [];
   errores: { [key: number]: { local: boolean, visitante: boolean } } = {};
 
-  constructor(private partidoService: PartidoService, private prediccionService: PrediccionService) {
+  constructor(private partidoService: PartidoService, private prediccionService: PrediccionService, private toastr: ToastrService) {
     countries.registerLocale(require('i18n-iso-countries/langs/es.json'));
   }
 
@@ -55,7 +56,7 @@ export class PartidosComponent implements OnInit {
   }
 
   predecir(index: number) {
-    const partido = this.partidos[index]; 
+    const partido = this.partidos[index];
     const localInput = document.getElementById(`local-${index}`) as HTMLInputElement;
     const visitanteInput = document.getElementById(`visitante-${index}`) as HTMLInputElement;
     const local = localInput.value;
@@ -68,6 +69,7 @@ export class PartidosComponent implements OnInit {
       console.log(`Enviando datos: Local - ${local}, Visitante - ${visitante}`);
       this.prediccionService.setPrediccion(partido.id, local, visitante, idUser).subscribe((data) => {
         console.log('Prediccion realizada', data);
+        this.toastr.success('Predicción guardada correctamente', 'Éxito'); // Mostrar toast aquí
       });
     }
   }
@@ -89,13 +91,38 @@ export class PartidosComponent implements OnInit {
     if (partido.goles_pais_local === null || partido.goles_pais_visitante === null) {
       return '';
     }
+
+    // Check if the user predicted the correct number of goals for each team
+    const acertoGolesLocal = partido.prediccion_pais_local === partido.goles_pais_local;
+    const acertoGolesVisitante = partido.prediccion_pais_visitante === partido.goles_pais_visitante;
+
+    if (acertoGolesLocal && acertoGolesVisitante) {
+      // User predicted the correct number of goals for both teams
+      return '+4 pts';
+    }
+
     let puntaje = 0;
-    if (partido.prediccion_pais_local !== null) {
-      puntaje += partido.goles_pais_local === partido.prediccion_pais_local ? 2 : 0;
+
+    // Determine the winner or if it's a draw
+    let resultado = '';
+    if (partido.goles_pais_local > partido.goles_pais_visitante) {
+      resultado = 'local'; // Local team wins
+    } else if (partido.goles_pais_local < partido.goles_pais_visitante) {
+      resultado = 'visitante'; // Visitor team wins
+    } else {
+      resultado = 'empate'; // It's a draw
     }
-    if (partido.prediccion_pais_visitante !== null) {
-      puntaje += partido.goles_pais_visitante === partido.prediccion_pais_visitante ? 2 : 0;
+
+    // Check if the user predicted the correct winner or draw
+    const acertoLocal = partido.prediccion_pais_local !== null && partido.prediccion_pais_local > partido.prediccion_pais_visitante;
+    const acertoVisitante = partido.prediccion_pais_visitante !== null && partido.prediccion_pais_local < partido.prediccion_pais_visitante;
+    const acertoEmpate = partido.prediccion_pais_local === partido.prediccion_pais_visitante;
+
+    if ((resultado === 'local' && acertoLocal) || (resultado === 'visitante' && acertoVisitante) || (resultado === 'empate' && acertoEmpate)) {
+      // User predicted the winner or the draw correctly
+      puntaje += 2;
     }
+
     return `+${puntaje} pts`;
   }
 }

@@ -36,4 +36,16 @@ export class PosicionesService {
       })
     );
   }
+
+  getRankingFinal(): Observable<any> {
+    return this.http.get<any>(this.apiUrl + "/administrador/getRankingFinal").pipe(
+      map((response) => { // Explicitly specify the type of 'response'
+        return response;
+      }),
+      catchError((error) => {
+        console.error('Error loading ranking', error);
+        return of(null); // Retornar un observable con un valor nulo para continuar el flujo
+      })
+    );
+  }
 }
