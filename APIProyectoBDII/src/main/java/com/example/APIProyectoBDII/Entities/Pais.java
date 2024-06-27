@@ -17,7 +17,7 @@ public class Pais {
     @Id
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
-    @Id
+    
     @Column(name = "iso", nullable = false, length = 2)
     private String iso;
 
