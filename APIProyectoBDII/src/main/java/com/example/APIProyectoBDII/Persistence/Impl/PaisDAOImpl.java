@@ -25,8 +25,8 @@ public class PaisDAOImpl implements IPaisDAO {
     }
 
     @Override
-    public void save(String nombre) {
-        paisRepository.createPais(nombre);
+    public void save(String nombre, String iso) {
+        paisRepository.createPais(nombre, iso);
 
     }
 
