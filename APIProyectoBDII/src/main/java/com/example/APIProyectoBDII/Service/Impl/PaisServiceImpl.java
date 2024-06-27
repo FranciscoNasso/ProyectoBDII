@@ -26,8 +26,8 @@ public class PaisServiceImpl implements IPaisService {
     }
 
     @Override
-    public void save(String nombre) {
-        paisDAO.save(nombre);
+    public void save(String nombre, String iso) {
+        paisDAO.save(nombre, iso);
     }
 
     @Override

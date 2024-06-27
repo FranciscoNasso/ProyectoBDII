@@ -51,7 +51,7 @@ public class PaisController {
         if(paisDTO.getNombre().isBlank()){
             return ResponseEntity.badRequest().body("Nombre es requerido");
         }
-        paisService.save(paisDTO.getNombre());
+        paisService.save(paisDTO.getNombre(), paisDTO.getIso());
         return ResponseEntity.created(new URI("/pais/save")).build();
     }
 

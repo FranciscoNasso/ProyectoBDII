@@ -10,7 +10,7 @@ public interface IPaisService {
 
     public Optional<Pais> findById(String nombre);
 
-    public void save(String nombre);
+    public void save(String nombre, String iso);
 
     public void delete(String nombre);
 }

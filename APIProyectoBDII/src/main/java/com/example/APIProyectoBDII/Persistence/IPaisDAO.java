@@ -11,7 +11,7 @@ public interface IPaisDAO {
 
     Optional<Pais> findById(String nombre);
 
-    public void save(String nombre);
+    public void save(String nombre, String iso);
 
     void delete(String nombre);
 }
